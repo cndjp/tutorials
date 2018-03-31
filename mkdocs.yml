@@ -1,0 +1,21 @@
+site_name: My Docs
+theme:
+    name: material
+    #feature:
+        #tabs: true
+markdown_extensions:
+    - admonition
+    - codehilite:
+        linenums: false
+    - def_list
+    - fontawesome_markdown
+    - footnotes
+    #- markdown_fenced_code_tabs:
+        #single_block_as_tab: false
+extra_css:
+    - "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
+pages:
+    - Home: index.md
+    - Create Loacal Cluster:
+        - Vagrant CoreOS Cluster: clusters/vagrant-coreos-cluster.md
+        - minikube: clusters/minikube.md
