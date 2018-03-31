@@ -1,0 +1,1003 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.1">
+    
+    
+      
+        <title>Vagrant CoreOS Cluster - My Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.78aab2dc.css">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#vagrant-coreos-cluster" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="My Docs" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                My Docs
+              </span>
+              <span class="md-header-nav__topic">
+                Vagrant CoreOS Cluster
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    My Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Create Loacal Cluster
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Create Loacal Cluster
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Vagrant CoreOS Cluster
+      </label>
+    
+    <a href="./" title="Vagrant CoreOS Cluster" class="md-nav__link md-nav__link--active">
+      Vagrant CoreOS Cluster
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="前提条件" class="md-nav__link">
+    前提条件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-kubernetes" title="1. Kubernetesクラスターのセットアップ" class="md-nav__link">
+    1. Kubernetesクラスターのセットアップ
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" title="1.1. 準備作業" class="md-nav__link">
+    1.1. 準備作業
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows-git" title="Windowsのみ - gitクライアントの設定変更" class="md-nav__link">
+    Windowsのみ - gitクライアントの設定変更
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maxos-x-homebrewwget" title="MaxOS Xのみ - homebrew、wgetのインストール" class="md-nav__link">
+    MaxOS Xのみ - homebrew、wgetのインストール
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux-nfs" title="Linuxのみ - NFSのインストール" class="md-nav__link">
+    Linuxのみ - NFSのインストール
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" title="1.2. インストールスクリプトの取得" class="md-nav__link">
+    1.2. インストールスクリプトの取得
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-firewall" title="1.3. Firewall無効化の確認" class="md-nav__link">
+    1.3. Firewall無効化の確認
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" title="1.4. インストールスクリプトの実行" class="md-nav__link">
+    1.4. インストールスクリプトの実行
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5" title="1-5. クラスターの停止/再起動" class="md-nav__link">
+    1-5. クラスターの停止/再起動
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-kubectl" title="2. kubectlのセットアップ" class="md-nav__link">
+    2. kubectlのセットアップ
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-windows-kubectl" title="2.1.  Windowsのみ - kubectlのインストール" class="md-nav__link">
+    2.1.  Windowsのみ - kubectlのインストール
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-kubernetes" title="2.2. Kubernetesクラスターへの疎通確認" class="md-nav__link">
+    2.2. Kubernetesクラスターへの疎通確認
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" title="3. 最初のアプリケーションを動かしてみる" class="md-nav__link">
+    3. 最初のアプリケーションを動かしてみる
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" title="3.1. サンプルアプリケーションのデプロイ" class="md-nav__link">
+    3.1. サンプルアプリケーションのデプロイ
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" title="3.2. アプリケーションへのアクセス" class="md-nav__link">
+    3.2. アプリケーションへのアクセス
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" title="3.3. サンプルアプリケーションの削除" class="md-nav__link">
+    3.3. サンプルアプリケーションの削除
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="参考リンク" class="md-nav__link">
+    参考リンク
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../minikube/" title="minikube" class="md-nav__link">
+      minikube
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="前提条件" class="md-nav__link">
+    前提条件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-kubernetes" title="1. Kubernetesクラスターのセットアップ" class="md-nav__link">
+    1. Kubernetesクラスターのセットアップ
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" title="1.1. 準備作業" class="md-nav__link">
+    1.1. 準備作業
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows-git" title="Windowsのみ - gitクライアントの設定変更" class="md-nav__link">
+    Windowsのみ - gitクライアントの設定変更
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maxos-x-homebrewwget" title="MaxOS Xのみ - homebrew、wgetのインストール" class="md-nav__link">
+    MaxOS Xのみ - homebrew、wgetのインストール
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux-nfs" title="Linuxのみ - NFSのインストール" class="md-nav__link">
+    Linuxのみ - NFSのインストール
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" title="1.2. インストールスクリプトの取得" class="md-nav__link">
+    1.2. インストールスクリプトの取得
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-firewall" title="1.3. Firewall無効化の確認" class="md-nav__link">
+    1.3. Firewall無効化の確認
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" title="1.4. インストールスクリプトの実行" class="md-nav__link">
+    1.4. インストールスクリプトの実行
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5" title="1-5. クラスターの停止/再起動" class="md-nav__link">
+    1-5. クラスターの停止/再起動
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-kubectl" title="2. kubectlのセットアップ" class="md-nav__link">
+    2. kubectlのセットアップ
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-windows-kubectl" title="2.1.  Windowsのみ - kubectlのインストール" class="md-nav__link">
+    2.1.  Windowsのみ - kubectlのインストール
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-kubernetes" title="2.2. Kubernetesクラスターへの疎通確認" class="md-nav__link">
+    2.2. Kubernetesクラスターへの疎通確認
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" title="3. 最初のアプリケーションを動かしてみる" class="md-nav__link">
+    3. 最初のアプリケーションを動かしてみる
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" title="3.1. サンプルアプリケーションのデプロイ" class="md-nav__link">
+    3.1. サンプルアプリケーションのデプロイ
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" title="3.2. アプリケーションへのアクセス" class="md-nav__link">
+    3.2. アプリケーションへのアクセス
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" title="3.3. サンプルアプリケーションの削除" class="md-nav__link">
+    3.3. サンプルアプリケーションの削除
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="参考リンク" class="md-nav__link">
+    参考リンク
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="vagrant-coreos-cluster">Vagrant CoreOS Cluster</h1>
+<p><a href="https://github.com/pires/kubernetes-vagrant-coreos-cluster">Kubernetes Vagrant CoreOS Cluster</a>にあるインストーラを利用して、Kubernetesクラスターを構成します。
+このインストーラーでは、ローカルPC上に複数のVirtualBox仮想マシンを立ち上げ、それらの上にKubernetesマルチノードクラスターを構成します。</p>
+<h2 id="_1">前提条件</h2>
+<p>この手順は以下の環境で実施することを前提とします。</p>
+<ul>
+<li>OS<ul>
+<li>MacOS X</li>
+<li>Linux (Ubuntu 16.04)</li>
+<li>Windows</li>
+</ul>
+</li>
+<li>インストールSW<ul>
+<li>Vagrant 1.8.6+</li>
+<li>VirtualBox 5.0.0+</li>
+</ul>
+</li>
+</ul>
+<p>以降の手順は、ほとんどの操作をコマンドラインツールから実行します。<strong>Mac/Linuxの場合はターミナル、Windowsの場合はWindows PowerShell</strong>を利用するものとして、手順を記述します。</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Linux(ubuntu 16.04)で、VirtualBox 5.1.x以上のバージョンでは動作しない問題を確認しています。当該OSを利用する場合は5.0.xの利用を推奨します。</p>
+</div>
+<h2 id="1-kubernetes">1. Kubernetesクラスターのセットアップ</h2>
+<h3 id="11">1.1. 準備作業</h3>
+<p>以下、お使いのマシンの環境に応じて、該当する準備作業を実施してください。</p>
+<h4 id="windows-git"><i class="fa fa-windows"></i> Windowsのみ - gitクライアントの設定変更</h4>
+<p>このチュートリアルで利用するKubernetesのインストールスクリプトには、Core OSの仮想マシン上で実行されるものが含まれます。</p>
+<p><code>git clone</code>時にこれらのスクリプトの改行コードが変換されてしまうと、Core OS上で正しく動作しない場合があります。これを避けるため、改行コードの自動変換を無効化するようにGitを設定しておきます。</p>
+<p>以下は、CLIのgitクライアントを利用してこの設定を行う例です。</p>
+<div class="codehilite"><pre><span></span>git config --global core.autocrlf false; git config --global core.eol lf
+</pre></div>
+
+
+<h4 id="maxos-x-homebrewwget"><i class="fa fa-apple"></i> MaxOS Xのみ - homebrew、wgetのインストール</h4>
+<p>先の手順でインストールスクリプトを実行すると、Macの場合wgetを使ってkubectl（Kubernetesのコマンドラインツール）がダウンロードされます。このため、事前にwgetをインストールしておく必要があります。</p>
+<p>ここではhomebrewを使ってwgetをインストールします。まず、homebrewのインストールです。</p>
+<div class="codehilite"><pre><span></span>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</pre></div>
+
+
+<p>次に、以下のコマンドでwgetをインストールします。</p>
+<div class="codehilite"><pre><span></span>brew install wget
+</pre></div>
+
+
+<h4 id="linux-nfs"><i class="fa fa-linux"></i> Linuxのみ - NFSのインストール</h4>
+<p>今回作成するクラスターは、Kubernetesノードの共有ディスクとしてNFSを利用します。NFSがインストールされていなければ、ここでインストールしておきます。</p>
+<div class="codehilite"><pre><span></span>apt-get install nfs-kernel-server
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>WindowsではNFSと同等の機能を提供するVagrantプラグインが自動的に利用されます。Macの場合は標準でNFSがインストールされています。</p>
+</div>
+<h3 id="12">1.2. インストールスクリプトの取得</h3>
+<p>コマンドラインツールを起動し、適当なディレクトリに<a href="https://github.com/pires/kubernetes-vagrant-coreos-cluster">インストールスクリプト</a>をクローンします。この時、タグ”1.7.10”を指定します。</p>
+<div class="codehilite"><pre><span></span>git clone -b 1.7.10 https://github.com/pires/kubernetes-vagrant-coreos-cluster.git
+</pre></div>
+
+
+<p>クローンして作成されたディレクトリをカレントディレクトリにしておきます。</p>
+<div class="codehilite"><pre><span></span>cd kubernetes-vagrant-coreos-cluster
+</pre></div>
+
+
+<h3 id="13-firewall">1.3. Firewall無効化の確認</h3>
+<p>NFSへの通信がFirewallによって遮断されてしまうことが多いので、ここで無効化しておきます。利用しているOS/セキュリティソフトウェアの手順に従って操作を行ってください。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>特にWindowsの場合、デフォルトのFirewallの設定でも遮断されてしまうので、注意してください。</p>
+</div>
+<h3 id="14">1.4. インストールスクリプトの実行</h3>
+<p>インストールスクリプトをデフォルトの設定で実行すると、以下のような構成のクラスターが構築されます。</p>
+<ul>
+<li>マスターノード:<ul>
+<li>ノード数: 1</li>
+<li>CPU: 2 vCPUs</li>
+<li>メモリ: 1024 MB</li>
+</ul>
+</li>
+<li>ワーカーノード:<ul>
+<li>ノード数: 2</li>
+<li>CPU: 2 vCPUs</li>
+<li>メモリ: 2048 MB</li>
+</ul>
+</li>
+</ul>
+<p>デフォルトの構成でインストールスクリプトを実行するには、以下のコマンドを実行します。</p>
+<div class="codehilite"><pre><span></span>vagrant up
+</pre></div>
+
+
+<p>利用しているPCが上記のスペックを賄うには非力な場合には、所定の環境変数を設定することによって構成を調整することが可能です。例えば、Macbook Air - Late 2011 4G Memでは、以下の構成でクラスターが稼働することを確認済みです。</p>
+<ul>
+<li>マスターノード:<ul>
+<li>ノード数: 1</li>
+<li>CPU: 1 vCPUs</li>
+<li>メモリ: 1024 MB</li>
+</ul>
+</li>
+<li>ワーカーノード:<ul>
+<li>ノード数: 2</li>
+<li>CPU: 1 vCPUs</li>
+<li>メモリ: 1024 MB</li>
+</ul>
+</li>
+</ul>
+<p>この構成でインストールスクリプトを実行するには、以下のコマンドを実行します。</p>
+<p><i class="fa fa-apple"></i> <strong>Mac</strong> / <i class="fa fa-linux"></i> <strong>Linux</strong></p>
+<div class="codehilite"><pre><span></span><span class="nv">NODES</span><span class="o">=</span><span class="m">2</span> <span class="nv">MASTER_MEM</span><span class="o">=</span><span class="m">1024</span> <span class="nv">MASTER_CPUS</span><span class="o">=</span><span class="m">1</span> <span class="nv">NODE_MEM</span><span class="o">=</span><span class="m">1024</span> <span class="nv">NODE_CPUS</span><span class="o">=</span><span class="m">1</span> vagrant up
+</pre></div>
+
+
+<p><i class="fa fa-windows"></i> <strong>Windows</strong></p>
+<div class="codehilite"><pre><span></span>set-item env:NODES -value 2; set-item env:MASTER_MEM -value 1024; set-item env:MASTER_CPUS -value 1; set-item env:NODE_MEM -value 1024; set-item env:NODE_CPUS -value 1; vagrant up
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>パラメータの詳細は、<a href="https://github.com/pires/kubernetes-vagrant-coreos-cluster/blob/master/README.md">インストールスクリプトのREADME.md</a>を参照してください。</p>
+</div>
+<p>コンソールに以下のような内容が出力されれば、クラスターの構築が成功しています。</p>
+<div class="codehilite"><pre><span></span>Bringing machine &#39;master&#39; up with &#39;virtualbox&#39; provider...
+Bringing machine &#39;node-01&#39; up with &#39;virtualbox&#39; provider...
+Bringing machine &#39;node-02&#39; up with &#39;virtualbox&#39; provider...
+==&gt; master: Running triggers before up...
+==&gt; master: 2017-11-15 01:25:08 +0900: setting up Kubernetes master...
+...（中略）
+    node-02: Running: inline script
+==&gt; node-02: Running triggers after up...
+==&gt; node-02: Waiting for Kubernetes minion [node-02] to become ready...
+==&gt; node-02: 2017-11-15 01:45:39 +0900: successfully deployed node-02
+</pre></div>
+
+
+<p>最後に、以下のコマンドで全ての仮想マシンが稼働していることを確認します。</p>
+<div class="codehilite"><pre><span></span>vagrant status
+</pre></div>
+
+
+<p>正常に稼働している場合、以下のような内容が出力されます。</p>
+<div class="codehilite"><pre><span></span>Current machine states:
+
+master                    running (virtualbox)
+node-01                   running (virtualbox)
+node-02                   running (virtualbox)
+</pre></div>
+
+
+<h3 id="1-5">1-5. クラスターの停止/再起動</h3>
+<p>ハンズオン終了後にクラスターを停止/再起動/削除する際には、以下の操作を行ってください</p>
+<p><strong>停止</strong></p>
+<div class="codehilite"><pre><span></span>vagrant halt
+</pre></div>
+
+
+<p><strong>起動</strong></p>
+<div class="codehilite"><pre><span></span>vagrant up
+</pre></div>
+
+
+<p><strong>削除</strong>（クラスターの停止後に実行）</p>
+<div class="codehilite"><pre><span></span>vagrant destroy
+</pre></div>
+
+
+<h2 id="2-kubectl">2. kubectlのセットアップ</h2>
+<p>kubectlはKubernetesの管理操作を行うためのCLIです。ここではkubectlのセットアップをおこないます。</p>
+<h3 id="21-windows-kubectl">2.1. <i class="fa fa-windows"></i> Windowsのみ - kubectlのインストール</h3>
+<p>Mac/Linuxの場合は、「2.2. Kubernetesクラスターへの疎通確認」に進んでください。）</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Mac/Linuxの場合は、インストールスクリプトにより自動でkubectlがインストールされます。</p>
+</div>
+<p>kubectlのバイナリファイルを、以下からダウンロードします。</p>
+<ul>
+<li><a href="https://storage.googleapis.com/kubernetes-release/release/v1.8.0/bin/windows/amd64/kubectl.exe">kubectl v1.8.0</a></li>
+</ul>
+<p>ダウンロードしたバイナリを適当なフォルダに配置し、PATHを通します。続いてWindows PowerShellを再起動した後、以下のコマンドを実行してkubectlが動作することを確認します。</p>
+<div class="codehilite"><pre><span></span>kubectl version
+</pre></div>
+
+
+<p>次に、Kubernetesクラスターにアクセスするための設定を行います。インストールスクリプト一式のトップをカレントディレクトリにしておきます。</p>
+<div class="codehilite"><pre><span></span>cd kubernetes-vagrant-coreos-cluster
+</pre></div>
+
+
+<p>以下のコマンドを順に実行していきます。</p>
+<div class="codehilite"><pre><span></span>kubectl config set-cluster default-cluster --server=https://172.17.8.101 --certificate-authority=<span class="nv">%CD%</span>/artifacts/tls/ca.pem
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>kubectl config set-credentials default-admin --certificate-authority=<span class="nv">%CD%</span>/artifacts/tls/ca.pem --client-key=<span class="nv">%CD%</span>/artifacts/tls/admin-key.pem --client-certificate=<span class="nv">%CD%</span>/artifacts/tls/admin.pem
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>kubectl config set-context default-cluster --cluster=default-cluster --user=default-admin
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>kubectl config use-context default-cluster
+</pre></div>
+
+
+<h3 id="22-kubernetes">2.2. Kubernetesクラスターへの疎通確認</h3>
+<p>以下のコマンドを実行すると、Kubernetesクラスターの一般的な情報を取得することができます。このコマンドで、クラスターへの疎通を確認します。</p>
+<div class="codehilite"><pre><span></span>kubectl cluster-info
+</pre></div>
+
+
+<p>コンソールに以下のような内容が出力されれば、クラスターとの疎通は問題ありません。</p>
+<div class="codehilite"><pre><span></span>Kubernetes master is running at https://172.17.8.101
+KubeDNS is running at https://172.17.8.101/api/v1/namespaces/kube-system/services/kube-dns/proxy
+
+To further debug and diagnose cluster problems, use &#39;kubectl cluster-info dump&#39;.
+</pre></div>
+
+
+<p>ここで、ノード一覧の取得も試してみます。</p>
+<div class="codehilite"><pre><span></span>kubectl get nodes
+</pre></div>
+
+
+<p>コンソール出力は以下のようになります。</p>
+<div class="codehilite"><pre><span></span>NAME           STATUS                     AGE       VERSION
+172.17.8.101   Ready,SchedulingDisabled   12h       v1.7.5
+172.17.8.102   Ready                      12h       v1.7.5
+172.17.8.103   Ready                      12h       v1.7.5
+</pre></div>
+
+
+<h2 id="3">3. 最初のアプリケーションを動かしてみる</h2>
+<p>ここでは、簡単なサンプルアプリケーションをデプロイして、クラスターの動作確認をします。</p>
+<h3 id="31">3.1. サンプルアプリケーションのデプロイ</h3>
+<p>Kubernetesクラスターにサンプルアプリケーションをデプロイしてみます。以下のコマンドを実行します。</p>
+<div class="codehilite"><pre><span></span>kubectl run kubernetes-bootcamp --image<span class="o">=</span>docker.io/jocatalin/kubernetes-bootcamp:v1 --port<span class="o">=</span><span class="m">8080</span>
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>このアプリケーションは、<a href="https://kubernetesbootcamp.github.io/kubernetes-bootcamp/">Kubernetesの公式のインタラクティブ・チュートリアル</a>で利用しているものと同じものです。</p>
+</div>
+<p>上記コマンドにより、サンプルアプリケーションのデプロイを管理する"Deployment"オブジェクトが作成されています。"Deployment"オブジェクトの情報を確認するために、以下のコマンドを実行してみてください。</p>
+<p><strong>Deploymentの一覧の取得</strong></p>
+<div class="codehilite"><pre><span></span>kubectl get deployments
+</pre></div>
+
+
+<p><strong>Deploymentの詳細情報の取得</strong></p>
+<div class="codehilite"><pre><span></span>kubectl describe deployments/kubernetes-bootcamp
+</pre></div>
+
+
+<h3 id="32">3.2. アプリケーションへのアクセス</h3>
+<p>アプリケーションにクラスターの外からアクセスするために、ここではkubectlの機能を使ってクラスター内に通じるプロキシを構成します。以下のコマンドを実行すると、localhostの8001ポートからクラスター内にアクセスできるようになります。</p>
+<div class="codehilite"><pre><span></span>kubectl proxy
+</pre></div>
+
+
+<p>まずは、Kubernetesのマスターノードで稼働しているapiserverに対してリクエストを送信し、プロキシが機能していることを確認します。</p>
+<p><i class="fa fa-apple"></i> <strong>Mac</strong> / <i class="fa fa-linux"></i> <strong>Linux</strong></p>
+<div class="codehilite"><pre><span></span>curl http://localhost:8001/version
+</pre></div>
+
+
+<p><i class="fa fa-windows"></i> <strong>Windows</strong></p>
+<div class="codehilite"><pre><span></span>Invoke-RestMethod -Uri <span class="s2">&quot;http://localhost:8001/version&quot;</span>
+</pre></div>
+
+
+<p>Kubernetesのバージョン情報が、以下のようなJSON形式で取得できます。</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;major&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;minor&quot;</span><span class="p">:</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;gitVersion&quot;</span><span class="p">:</span> <span class="s2">&quot;v1.7.5&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;gitCommit&quot;</span><span class="p">:</span> <span class="s2">&quot;17d7182a7ccbb167074be7a87f0a68bd00d58d97&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;gitTreeState&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;buildDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-31T08:56:23Z&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;goVersion&quot;</span><span class="p">:</span> <span class="s2">&quot;go1.8.3&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;compiler&quot;</span><span class="p">:</span> <span class="s2">&quot;gc&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;platform&quot;</span><span class="p">:</span> <span class="err">&quot;linux/amd</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>いよいよアプリケーションにアクセスしてみます。以下のコマンドを順に実行してください。</p>
+<p><i class="fa fa-apple"></i> <strong>Mac</strong> / <i class="fa fa-linux"></i> <strong>Linux</strong></p>
+<div class="codehilite"><pre><span></span><span class="nb">export</span> <span class="nv">POD_NAME</span><span class="o">=</span><span class="k">$(</span>kubectl get pods -o go-template --template <span class="s1">&#39;{{range .items}}{{.metadata.name}}{{&quot;\n&quot;}}{{end}}&#39;</span><span class="k">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>curl http://localhost:8001/api/v1/proxy/namespaces/default/pods/<span class="nv">$POD_NAME</span>/
+</pre></div>
+
+
+<p><i class="fa fa-windows"></i> <strong>Windows</strong></p>
+<div class="codehilite"><pre><span></span>$POD_NAME=kubectl get pods -o go-template --template &#39;{{range .items}}{{.metadata.name}}{{\<span class="s2">&quot;\n\&quot;</span>}}{{end}}&#39;
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>Invoke-RestMethod -Uri <span class="s2">&quot;http://localhost:8001/api/v1/proxy/namespaces/default/pods/$POD_NAME/&quot;</span>
+</pre></div>
+
+
+<p>正しく動作していれば、以下のようなレスポンスが返却されます。</p>
+<div class="codehilite"><pre><span></span>Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-2457653786-vdgr2 | v=1
+</pre></div>
+
+
+<h3 id="33">3.3. サンプルアプリケーションの削除</h3>
+<p>デプロイしたアプリケーションを削除するには、Deploymentを削除します。</p>
+<div class="codehilite"><pre><span></span>kubectl delete deployment kubernetes-bootcamp
+</pre></div>
+
+
+<hr />
+<p>以上で、Vagrant CoreOS Clusterの構築は完了です。</p>
+<h2 id="_2">参考リンク</h2>
+<dl>
+<dt>kubectl リファレンス(v1.7)</dt>
+<dd><a href="https://v1-7.docs.kubernetes.io/docs/user-guide/kubectl/v1.7/">https://v1-7.docs.kubernetes.io/docs/user-guide/kubectl/v1.7/</a></dd>
+</dl>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../.." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Home
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../minikube/" title="minikube" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                minikube
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.8eb9be28.js"></script>
+      
+      <script>app.initialize({version:"0.17.3",url:{base:"../.."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>
