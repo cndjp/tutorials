@@ -37,7 +37,7 @@ Vagrant CoreOS Cluster
 
     git config --global core.autocrlf false; git config --global core.eol lf
 
-#### :fa-apple: MaxOS Xのみ - homebrew、wgetのインストール
+#### :fa-apple: MacOS Xのみ - homebrew、wgetのインストール
 先の手順でインストールスクリプトを実行すると、Macの場合wgetを使ってkubectl（Kubernetesのコマンドラインツール）がダウンロードされます。このため、事前にwgetをインストールしておく必要があります。
 
 ここではhomebrewを使ってwgetをインストールします。まず、homebrewのインストールです。
