@@ -1,0 +1,11 @@
+.md-typeset h1 {
+  font-size: 30pt;
+  /*border-bottom: solid 2px teal;*/
+  /*padding-bottom: 4px;*/
+}
+.md-typeset h2 {
+  border-bottom: solid 1px teal;
+}
+.md-typeset h3 {
+  border-bottom: 1px dotted teal;
+}

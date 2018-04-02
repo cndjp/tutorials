@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-04-01</lastmod>
+     <lastmod>2018-04-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,14 +12,14 @@
     
         
     <url>
-     <loc>/clusters/vagrant-coreos-cluster/</loc>
-     <lastmod>2018-04-01</lastmod>
+     <loc>/documents/create-local-cluster/vagrant-coreos-cluster/</loc>
+     <lastmod>2018-04-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/clusters/minikube/</loc>
-     <lastmod>2018-04-01</lastmod>
+     <loc>/documents/create-local-cluster/minikube/</loc>
+     <lastmod>2018-04-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
         

@@ -3,7 +3,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="ja" class="no-js">
   <head>
     
       <meta charset="utf-8">
@@ -13,38 +13,40 @@
       
       
       
-        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+        <meta name="lang:clipboard.copy" content="クリップボードへコピー">
       
-        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+        <meta name="lang:clipboard.copied" content="コピーしました">
       
-        <meta name="lang:search.language" content="en">
+        <meta name="lang:search.language" content="en, jp">
       
         <meta name="lang:search.pipeline.stopwords" content="True">
       
         <meta name="lang:search.pipeline.trimmer" content="True">
       
-        <meta name="lang:search.result.none" content="No matching documents">
+        <meta name="lang:search.result.none" content="何も見つかりませんでした">
       
-        <meta name="lang:search.result.one" content="1 matching document">
+        <meta name="lang:search.result.one" content="1件見つかりました">
       
-        <meta name="lang:search.result.other" content="# matching documents">
+        <meta name="lang:search.result.other" content="#件見つかりました">
       
-        <meta name="lang:search.tokenizer" content="[\s\-]+">
+        <meta name="lang:search.tokenizer" content="[\s\-　、。，．]+">
       
-      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.1">
     
     
       
-        <title>Vagrant CoreOS Cluster - My Docs</title>
+        <title>Vagrant CoreOS Cluster - Cloud Native Developers JP - ハンズオンチュートリアル</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.78aab2dc.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.78aab2dc.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.6079476c.css">
       
     
     
-      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../../../assets/javascripts/modernizr.1aa3b519.js"></script>
     
     
       <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
@@ -57,14 +59,37 @@
     
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="teal">
   
     <svg class="md-svg">
       <defs>
         
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
         
       </defs>
     </svg>
@@ -81,9 +106,9 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../.." title="My Docs" class="md-header-nav__button md-logo">
+        <a href="../../.." title="Cloud Native Developers JP - ハンズオンチュートリアル" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <i class="md-icon">cloud</i>
           
         </a>
       </div>
@@ -95,7 +120,7 @@
           
             
               <span class="md-header-nav__topic">
-                My Docs
+                Cloud Native Developers JP - ハンズオンチュートリアル
               </span>
               <span class="md-header-nav__topic">
                 Vagrant CoreOS Cluster
@@ -113,7 +138,7 @@
   <label class="md-search__overlay" for="search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" name="query" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -123,7 +148,7 @@
       <div class="md-search__scrollwrap" data-md-scrollfix>
         <div class="md-search-result" data-md-component="result">
           <div class="md-search-result__meta">
-            Type to start searching
+            検索キーワードを入力してください
           </div>
           <ol class="md-search-result__list"></ol>
         </div>
@@ -134,6 +159,30 @@
           
         
       </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cndjp/tutorials/" title="リポジトリへ" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cndjp/tutorials
+    </div>
+  </a>
+
+          </div>
+        </div>
       
     </div>
   </nav>
@@ -155,11 +204,33 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <i class="md-icon">cloud</i>
       
     </span>
-    My Docs
+    Cloud Native Developers JP - ハンズオンチュートリアル
   </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cndjp/tutorials/" title="リポジトリへ" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cndjp/tutorials
+    </div>
+  </a>
+
+    </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
     
@@ -169,7 +240,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../.." title="Home" class="md-nav__link">
+    <a href="../../.." title="Home" class="md-nav__link">
       Home
     </a>
   </li>
@@ -225,7 +296,7 @@
     
   
   
-    <label class="md-nav__title" for="toc">Table of contents</label>
+    <label class="md-nav__title" for="toc">目次</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
@@ -423,7 +494,7 @@
     
   
   
-    <label class="md-nav__title" for="toc">Table of contents</label>
+    <label class="md-nav__title" for="toc">目次</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
@@ -592,11 +663,13 @@
             <article class="md-content__inner md-typeset">
               
                 
+                  <a href="https://github.com/cndjp/tutorials/edit/master/docs/documents/create-local-cluster/vagrant-coreos-cluster.md" title="編集" class="md-icon md-content__icon">&#xE3C9;</a>
                 
-                <h1 id="vagrant-coreos-cluster">Vagrant CoreOS Cluster</h1>
+                
+                <h1 id="vagrant-coreos-cluster">Vagrant CoreOS Cluster<a class="headerlink" href="#vagrant-coreos-cluster" title="Permanent link">&para;</a></h1>
 <p><a href="https://github.com/pires/kubernetes-vagrant-coreos-cluster">Kubernetes Vagrant CoreOS Cluster</a>にあるインストーラを利用して、Kubernetesクラスターを構成します。
 このインストーラーでは、ローカルPC上に複数のVirtualBox仮想マシンを立ち上げ、それらの上にKubernetesマルチノードクラスターを構成します。</p>
-<h2 id="_1">前提条件</h2>
+<h2 id="_1">前提条件<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>この手順は以下の環境で実施することを前提とします。</p>
 <ul>
 <li>OS<ul>
@@ -616,10 +689,10 @@
 <p class="admonition-title">Warning</p>
 <p>Linux(ubuntu 16.04)で、VirtualBox 5.1.x以上のバージョンでは動作しない問題を確認しています。当該OSを利用する場合は5.0.xの利用を推奨します。</p>
 </div>
-<h2 id="1-kubernetes">1. Kubernetesクラスターのセットアップ</h2>
-<h3 id="11">1.1. 準備作業</h3>
+<h2 id="1-kubernetes">1. Kubernetesクラスターのセットアップ<a class="headerlink" href="#1-kubernetes" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1. 準備作業<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
 <p>以下、お使いのマシンの環境に応じて、該当する準備作業を実施してください。</p>
-<h4 id="windows-git"><i class="fa fa-windows"></i> Windowsのみ - gitクライアントの設定変更</h4>
+<h4 id="windows-git"><i class="fa fa-windows"></i> Windowsのみ - gitクライアントの設定変更<a class="headerlink" href="#windows-git" title="Permanent link">&para;</a></h4>
 <p>このチュートリアルで利用するKubernetesのインストールスクリプトには、Core OSの仮想マシン上で実行されるものが含まれます。</p>
 <p><code>git clone</code>時にこれらのスクリプトの改行コードが変換されてしまうと、Core OS上で正しく動作しない場合があります。これを避けるため、改行コードの自動変換を無効化するようにGitを設定しておきます。</p>
 <p>以下は、CLIのgitクライアントを利用してこの設定を行う例です。</p>
@@ -627,7 +700,7 @@
 </pre></div>
 
 
-<h4 id="maxos-x-homebrewwget"><i class="fa fa-apple"></i> MaxOS Xのみ - homebrew、wgetのインストール</h4>
+<h4 id="maxos-x-homebrewwget"><i class="fa fa-apple"></i> MaxOS Xのみ - homebrew、wgetのインストール<a class="headerlink" href="#maxos-x-homebrewwget" title="Permanent link">&para;</a></h4>
 <p>先の手順でインストールスクリプトを実行すると、Macの場合wgetを使ってkubectl（Kubernetesのコマンドラインツール）がダウンロードされます。このため、事前にwgetをインストールしておく必要があります。</p>
 <p>ここではhomebrewを使ってwgetをインストールします。まず、homebrewのインストールです。</p>
 <div class="codehilite"><pre><span></span>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
@@ -639,7 +712,7 @@
 </pre></div>
 
 
-<h4 id="linux-nfs"><i class="fa fa-linux"></i> Linuxのみ - NFSのインストール</h4>
+<h4 id="linux-nfs"><i class="fa fa-linux"></i> Linuxのみ - NFSのインストール<a class="headerlink" href="#linux-nfs" title="Permanent link">&para;</a></h4>
 <p>今回作成するクラスターは、Kubernetesノードの共有ディスクとしてNFSを利用します。NFSがインストールされていなければ、ここでインストールしておきます。</p>
 <div class="codehilite"><pre><span></span>apt-get install nfs-kernel-server
 </pre></div>
@@ -649,7 +722,7 @@
 <p class="admonition-title">Note</p>
 <p>WindowsではNFSと同等の機能を提供するVagrantプラグインが自動的に利用されます。Macの場合は標準でNFSがインストールされています。</p>
 </div>
-<h3 id="12">1.2. インストールスクリプトの取得</h3>
+<h3 id="12">1.2. インストールスクリプトの取得<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>コマンドラインツールを起動し、適当なディレクトリに<a href="https://github.com/pires/kubernetes-vagrant-coreos-cluster">インストールスクリプト</a>をクローンします。この時、タグ”1.7.10”を指定します。</p>
 <div class="codehilite"><pre><span></span>git clone -b 1.7.10 https://github.com/pires/kubernetes-vagrant-coreos-cluster.git
 </pre></div>
@@ -660,13 +733,13 @@
 </pre></div>
 
 
-<h3 id="13-firewall">1.3. Firewall無効化の確認</h3>
+<h3 id="13-firewall">1.3. Firewall無効化の確認<a class="headerlink" href="#13-firewall" title="Permanent link">&para;</a></h3>
 <p>NFSへの通信がFirewallによって遮断されてしまうことが多いので、ここで無効化しておきます。利用しているOS/セキュリティソフトウェアの手順に従って操作を行ってください。</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>特にWindowsの場合、デフォルトのFirewallの設定でも遮断されてしまうので、注意してください。</p>
 </div>
-<h3 id="14">1.4. インストールスクリプトの実行</h3>
+<h3 id="14">1.4. インストールスクリプトの実行<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
 <p>インストールスクリプトをデフォルトの設定で実行すると、以下のような構成のクラスターが構築されます。</p>
 <ul>
 <li>マスターノード:<ul>
@@ -745,7 +818,7 @@ node-02                   running (virtualbox)
 </pre></div>
 
 
-<h3 id="1-5">1-5. クラスターの停止/再起動</h3>
+<h3 id="1-5">1-5. クラスターの停止/再起動<a class="headerlink" href="#1-5" title="Permanent link">&para;</a></h3>
 <p>ハンズオン終了後にクラスターを停止/再起動/削除する際には、以下の操作を行ってください</p>
 <p><strong>停止</strong></p>
 <div class="codehilite"><pre><span></span>vagrant halt
@@ -762,9 +835,9 @@ node-02                   running (virtualbox)
 </pre></div>
 
 
-<h2 id="2-kubectl">2. kubectlのセットアップ</h2>
+<h2 id="2-kubectl">2. kubectlのセットアップ<a class="headerlink" href="#2-kubectl" title="Permanent link">&para;</a></h2>
 <p>kubectlはKubernetesの管理操作を行うためのCLIです。ここではkubectlのセットアップをおこないます。</p>
-<h3 id="21-windows-kubectl">2.1. <i class="fa fa-windows"></i> Windowsのみ - kubectlのインストール</h3>
+<h3 id="21-windows-kubectl">2.1. <i class="fa fa-windows"></i> Windowsのみ - kubectlのインストール<a class="headerlink" href="#21-windows-kubectl" title="Permanent link">&para;</a></h3>
 <p>Mac/Linuxの場合は、「2.2. Kubernetesクラスターへの疎通確認」に進んでください。）</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -801,7 +874,7 @@ node-02                   running (virtualbox)
 </pre></div>
 
 
-<h3 id="22-kubernetes">2.2. Kubernetesクラスターへの疎通確認</h3>
+<h3 id="22-kubernetes">2.2. Kubernetesクラスターへの疎通確認<a class="headerlink" href="#22-kubernetes" title="Permanent link">&para;</a></h3>
 <p>以下のコマンドを実行すると、Kubernetesクラスターの一般的な情報を取得することができます。このコマンドで、クラスターへの疎通を確認します。</p>
 <div class="codehilite"><pre><span></span>kubectl cluster-info
 </pre></div>
@@ -828,9 +901,9 @@ To further debug and diagnose cluster problems, use &#39;kubectl cluster-info du
 </pre></div>
 
 
-<h2 id="3">3. 最初のアプリケーションを動かしてみる</h2>
+<h2 id="3">3. 最初のアプリケーションを動かしてみる<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <p>ここでは、簡単なサンプルアプリケーションをデプロイして、クラスターの動作確認をします。</p>
-<h3 id="31">3.1. サンプルアプリケーションのデプロイ</h3>
+<h3 id="31">3.1. サンプルアプリケーションのデプロイ<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <p>Kubernetesクラスターにサンプルアプリケーションをデプロイしてみます。以下のコマンドを実行します。</p>
 <div class="codehilite"><pre><span></span>kubectl run kubernetes-bootcamp --image<span class="o">=</span>docker.io/jocatalin/kubernetes-bootcamp:v1 --port<span class="o">=</span><span class="m">8080</span>
 </pre></div>
@@ -851,7 +924,7 @@ To further debug and diagnose cluster problems, use &#39;kubectl cluster-info du
 </pre></div>
 
 
-<h3 id="32">3.2. アプリケーションへのアクセス</h3>
+<h3 id="32">3.2. アプリケーションへのアクセス<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p>アプリケーションにクラスターの外からアクセスするために、ここではkubectlの機能を使ってクラスター内に通じるプロキシを構成します。以下のコマンドを実行すると、localhostの8001ポートからクラスター内にアクセスできるようになります。</p>
 <div class="codehilite"><pre><span></span>kubectl proxy
 </pre></div>
@@ -907,7 +980,7 @@ To further debug and diagnose cluster problems, use &#39;kubectl cluster-info du
 </pre></div>
 
 
-<h3 id="33">3.3. サンプルアプリケーションの削除</h3>
+<h3 id="33">3.3. サンプルアプリケーションの削除<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <p>デプロイしたアプリケーションを削除するには、Deploymentを削除します。</p>
 <div class="codehilite"><pre><span></span>kubectl delete deployment kubernetes-bootcamp
 </pre></div>
@@ -915,7 +988,7 @@ To further debug and diagnose cluster problems, use &#39;kubectl cluster-info du
 
 <hr />
 <p>以上で、Vagrant CoreOS Clusterの構築は完了です。</p>
-<h2 id="_2">参考リンク</h2>
+<h2 id="_2">参考リンク<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <dl>
 <dt>kubectl リファレンス(v1.7)</dt>
 <dd><a href="https://v1-7.docs.kubernetes.io/docs/user-guide/kubectl/v1.7/">https://v1-7.docs.kubernetes.io/docs/user-guide/kubectl/v1.7/</a></dd>
@@ -940,14 +1013,14 @@ To further debug and diagnose cluster problems, use &#39;kubectl cluster-info du
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../.." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../.." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
-                  Previous
+                  前
                 </span>
                 Home
               </span>
@@ -959,7 +1032,7 @@ To further debug and diagnose cluster problems, use &#39;kubectl cluster-info du
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
-                  Next
+                  次
                 </span>
                 minikube
               </span>
@@ -984,6 +1057,14 @@ To further debug and diagnose cluster problems, use &#39;kubectl cluster-info du
       </div>
       
         
+  <div class="md-footer-social">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+      <a href="https://github.com/cndjp" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
       
     </div>
   </div>
@@ -991,9 +1072,30 @@ To further debug and diagnose cluster problems, use &#39;kubectl cluster-info du
       
     </div>
     
-      <script src="../../assets/javascripts/application.8eb9be28.js"></script>
+      <script src="../../../assets/javascripts/application.8eb9be28.js"></script>
       
-      <script>app.initialize({version:"0.17.3",url:{base:"../.."}})</script>
+        
+        
+          
+          <script src="../../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+          
+            
+              
+                <script src="../../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+            <script src="../../../assets/javascripts/lunr/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"0.17.3",url:{base:"../../.."}})</script>
       
     
     
