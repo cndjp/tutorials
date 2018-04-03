@@ -58,13 +58,28 @@ Vagrant CoreOS Cluster
     WindowsではNFSと同等の機能を提供するVagrantプラグインが自動的に利用されます。Macの場合は標準でNFSがインストールされています。
 
 ### 1.2. インストールスクリプトの取得
-コマンドラインツールを起動し、適当なディレクトリに[インストールスクリプト](https://github.com/pires/kubernetes-vagrant-coreos-cluster)をクローンします。この時、タグ”1.7.10”を指定します。
+コマンドラインツールを起動し、適当なディレクトリに[インストールスクリプト](https://github.com/pires/kubernetes-vagrant-coreos-cluster)をクローンします。この時、タグ”1.7.11”を指定します。
 
-    git clone -b 1.7.10 https://github.com/pires/kubernetes-vagrant-coreos-cluster.git
+    git clone -b 1.7.11 https://github.com/pires/kubernetes-vagrant-coreos-cluster.git
 
 クローンして作成されたディレクトリをカレントディレクトリにしておきます。
 
     cd kubernetes-vagrant-coreos-cluster
+
+#### :fa-windows: Windowsのみ - インストールスクリプトの修正
+Windowsの場合は、クローンして作成されたディレクトリ直下にあるVagrantfileを一部修正する必要があります。テキストエディタでVagrantfileを開き、以下の様に修正してください。
+
+```diff
+  331          end
+  332          if not res.is_a? Net::HTTPSuccess
+  333            if OS.windows?
+- 334              run_remote "/opt/bin/kubectl create -f /home/core/dns-deployment.yaml"
++ 334              run_remote "/opt/bin/kubectl apply -f /home/core/dns-deployment.yaml"
+  335            else
+  336              system "kubectl create -f temp/dns-deployment.yaml"
+  337            end
+```
+
 
 ### 1.3. Firewall無効化の確認
 NFSへの通信がFirewallによって遮断されてしまうことが多いので、ここで無効化しておきます。利用しているOS/セキュリティソフトウェアの手順に従って操作を行ってください。
@@ -104,13 +119,18 @@ NFSへの通信がFirewallによって遮断されてしまうことが多いの
 :fa-apple: __Mac__ / :fa-linux: __Linux__
 
 ```sh
-NODES=2 MASTER_MEM=1024 MASTER_CPUS=1 NODE_MEM=1024 NODE_CPUS=1 vagrant up
+MASTER_MEM=1024 MASTER_CPUS=1 NODES=2 NODE_MEM=1024 NODE_CPUS=1 vagrant up
 ```
 
 :fa-windows: __Windows__
 
 ```bat
-set-item env:NODES -value 2; set-item env:MASTER_MEM -value 1024; set-item env:MASTER_CPUS -value 1; set-item env:NODE_MEM -value 1024; set-item env:NODE_CPUS -value 1; vagrant up
+set-item env:MASTER_MEM -value 1024;`
+set-item env:MASTER_CPUS -value 1;`
+set-item env:NODES -value 2;`
+set-item env:NODE_MEM -value 1024;`
+set-item env:NODE_CPUS -value 1;`
+vagrant up
 ```
 
 !!!Note
@@ -153,6 +173,8 @@ __起動__
 
     vagrant up
 
+初回のインストールスクリプト実行時に環境変数を設定している場合は、停止後に再度起動する際も同じ環境変数を指定してください。
+
 __削除__（クラスターの停止後に実行）
 
     vagrant destroy
@@ -183,13 +205,20 @@ kubectlのバイナリファイルを、以下からダウンロードします�
 以下のコマンドを順に実行していきます。
 
 ```bat
-kubectl config set-cluster default-cluster --server=https://172.17.8.101 --certificate-authority=%CD%/artifacts/tls/ca.pem
+kubectl config set-cluster default-cluster`
+    --server=https://172.17.8.101`
+    --certificate-authority=%CD%/artifacts/tls/ca.pem
 ```
 ```bat
-kubectl config set-credentials default-admin --certificate-authority=%CD%/artifacts/tls/ca.pem --client-key=%CD%/artifacts/tls/admin-key.pem --client-certificate=%CD%/artifacts/tls/admin.pem
+kubectl config set-credentials default-admin`
+    --certificate-authority=%CD%/artifacts/tls/ca.pem`
+    --client-key=%CD%/artifacts/tls/admin-key.pem`
+    --client-certificate=%CD%/artifacts/tls/admin.pem
 ```
 ```bat
-kubectl config set-context default-cluster --cluster=default-cluster --user=default-admin
+kubectl config set-context default-cluster`
+    --cluster=default-cluster`
+    --user=default-admin
 ```
 ```bat
 kubectl config use-context default-cluster
@@ -214,17 +243,10 @@ kubectl config use-context default-cluster
 コンソール出力は以下のようになります。
 
     NAME           STATUS                     AGE       VERSION
-    172.17.8.101   Ready,SchedulingDisabled   12h       v1.7.5
-    172.17.8.102   Ready                      12h       v1.7.5
-    172.17.8.103   Ready                      12h       v1.7.5
+    172.17.8.101   Ready,SchedulingDisabled   12h       v1.7.11
+    172.17.8.102   Ready                      12h       v1.7.11
+    172.17.8.103   Ready                      12h       v1.7.11
 
 
 ---
 以上で、Vagrant CoreOS Clusterの構築、及びkubectlのセットアップは完了です。
-
-
-参考リンク
-----------
-
-kubectl リファレンス(v1.7)
-:    [https://v1-7.docs.kubernetes.io/docs/user-guide/kubectl/v1.7/](https://v1-7.docs.kubernetes.io/docs/user-guide/kubectl/v1.7/)
