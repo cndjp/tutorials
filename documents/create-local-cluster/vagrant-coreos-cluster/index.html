@@ -353,6 +353,19 @@
     1.2. インストールスクリプトの取得
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows-" title="Windowsのみ - インストールスクリプトの修正" class="md-nav__link">
+    Windowsのみ - インストールスクリプトの修正
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -405,13 +418,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" title="参考リンク" class="md-nav__link">
-    参考リンク
-  </a>
   
 </li>
       
@@ -541,6 +547,19 @@
     1.2. インストールスクリプトの取得
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows-" title="Windowsのみ - インストールスクリプトの修正" class="md-nav__link">
+    Windowsのみ - インストールスクリプトの修正
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -593,13 +612,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" title="参考リンク" class="md-nav__link">
-    参考リンク
-  </a>
   
 </li>
       
@@ -680,13 +692,26 @@
 <p>WindowsではNFSと同等の機能を提供するVagrantプラグインが自動的に利用されます。Macの場合は標準でNFSがインストールされています。</p>
 </div>
 <h3 id="12">1.2. インストールスクリプトの取得<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<p>コマンドラインツールを起動し、適当なディレクトリに<a href="https://github.com/pires/kubernetes-vagrant-coreos-cluster">インストールスクリプト</a>をクローンします。この時、タグ”1.7.10”を指定します。</p>
-<div class="codehilite"><pre><span></span>git clone -b 1.7.10 https://github.com/pires/kubernetes-vagrant-coreos-cluster.git
+<p>コマンドラインツールを起動し、適当なディレクトリに<a href="https://github.com/pires/kubernetes-vagrant-coreos-cluster">インストールスクリプト</a>をクローンします。この時、タグ”1.7.11”を指定します。</p>
+<div class="codehilite"><pre><span></span>git clone -b 1.7.11 https://github.com/pires/kubernetes-vagrant-coreos-cluster.git
 </pre></div>
 
 
 <p>クローンして作成されたディレクトリをカレントディレクトリにしておきます。</p>
 <div class="codehilite"><pre><span></span>cd kubernetes-vagrant-coreos-cluster
+</pre></div>
+
+
+<h4 id="windows-"><i class="fa fa-windows"></i> Windowsのみ - インストールスクリプトの修正<a class="headerlink" href="#windows-" title="Permanent link">&para;</a></h4>
+<p>Windowsの場合は、クローンして作成されたディレクトリ直下にあるVagrantfileを一部修正する必要があります。テキストエディタでVagrantfileを開き、以下の様に修正してください。</p>
+<div class="codehilite"><pre><span></span>  331          end
+  332          if not res.is_a? Net::HTTPSuccess
+  333            if OS.windows?
+<span class="gd">- 334              run_remote &quot;/opt/bin/kubectl create -f /home/core/dns-deployment.yaml&quot;</span>
+<span class="gi">+ 334              run_remote &quot;/opt/bin/kubectl apply -f /home/core/dns-deployment.yaml&quot;</span>
+  335            else
+  336              system &quot;kubectl create -f temp/dns-deployment.yaml&quot;
+  337            end
 </pre></div>
 
 
@@ -734,12 +759,17 @@
 </ul>
 <p>この構成でインストールスクリプトを実行するには、以下のコマンドを実行します。</p>
 <p><i class="fa fa-apple"></i> <strong>Mac</strong> / <i class="fa fa-linux"></i> <strong>Linux</strong></p>
-<div class="codehilite"><pre><span></span><span class="nv">NODES</span><span class="o">=</span><span class="m">2</span> <span class="nv">MASTER_MEM</span><span class="o">=</span><span class="m">1024</span> <span class="nv">MASTER_CPUS</span><span class="o">=</span><span class="m">1</span> <span class="nv">NODE_MEM</span><span class="o">=</span><span class="m">1024</span> <span class="nv">NODE_CPUS</span><span class="o">=</span><span class="m">1</span> vagrant up
+<div class="codehilite"><pre><span></span><span class="nv">MASTER_MEM</span><span class="o">=</span><span class="m">1024</span> <span class="nv">MASTER_CPUS</span><span class="o">=</span><span class="m">1</span> <span class="nv">NODES</span><span class="o">=</span><span class="m">2</span> <span class="nv">NODE_MEM</span><span class="o">=</span><span class="m">1024</span> <span class="nv">NODE_CPUS</span><span class="o">=</span><span class="m">1</span> vagrant up
 </pre></div>
 
 
 <p><i class="fa fa-windows"></i> <strong>Windows</strong></p>
-<div class="codehilite"><pre><span></span>set-item env:NODES -value 2; set-item env:MASTER_MEM -value 1024; set-item env:MASTER_CPUS -value 1; set-item env:NODE_MEM -value 1024; set-item env:NODE_CPUS -value 1; vagrant up
+<div class="codehilite"><pre><span></span>set-item env:MASTER_MEM -value 1024;`
+set-item env:MASTER_CPUS -value 1;`
+set-item env:NODES -value 2;`
+set-item env:NODE_MEM -value 1024;`
+set-item env:NODE_CPUS -value 1;`
+vagrant up
 </pre></div>
 
 
@@ -787,6 +817,7 @@ node-02                   running (virtualbox)
 </pre></div>
 
 
+<p>初回のインストールスクリプト実行時に環境変数を設定している場合は、停止後に再度起動する際も同じ環境変数を指定してください。</p>
 <p><strong>削除</strong>（クラスターの停止後に実行）</p>
 <div class="codehilite"><pre><span></span>vagrant destroy
 </pre></div>
@@ -815,15 +846,22 @@ node-02                   running (virtualbox)
 
 
 <p>以下のコマンドを順に実行していきます。</p>
-<div class="codehilite"><pre><span></span>kubectl config set-cluster default-cluster --server=https://172.17.8.101 --certificate-authority=<span class="nv">%CD%</span>/artifacts/tls/ca.pem
+<div class="codehilite"><pre><span></span>kubectl config set-cluster default-cluster`
+    --server=https://172.17.8.101`
+    --certificate-authority=<span class="nv">%CD%</span>/artifacts/tls/ca.pem
 </pre></div>
 
 
-<div class="codehilite"><pre><span></span>kubectl config set-credentials default-admin --certificate-authority=<span class="nv">%CD%</span>/artifacts/tls/ca.pem --client-key=<span class="nv">%CD%</span>/artifacts/tls/admin-key.pem --client-certificate=<span class="nv">%CD%</span>/artifacts/tls/admin.pem
+<div class="codehilite"><pre><span></span>kubectl config set-credentials default-admin`
+    --certificate-authority=<span class="nv">%CD%</span>/artifacts/tls/ca.pem`
+    --client-key=<span class="nv">%CD%</span>/artifacts/tls/admin-key.pem`
+    --client-certificate=<span class="nv">%CD%</span>/artifacts/tls/admin.pem
 </pre></div>
 
 
-<div class="codehilite"><pre><span></span>kubectl config set-context default-cluster --cluster=default-cluster --user=default-admin
+<div class="codehilite"><pre><span></span>kubectl config set-context default-cluster`
+    --cluster=default-cluster`
+    --user=default-admin
 </pre></div>
 
 
@@ -852,19 +890,14 @@ To further debug and diagnose cluster problems, use &#39;kubectl cluster-info du
 
 <p>コンソール出力は以下のようになります。</p>
 <div class="codehilite"><pre><span></span>NAME           STATUS                     AGE       VERSION
-172.17.8.101   Ready,SchedulingDisabled   12h       v1.7.5
-172.17.8.102   Ready                      12h       v1.7.5
-172.17.8.103   Ready                      12h       v1.7.5
+172.17.8.101   Ready,SchedulingDisabled   12h       v1.7.11
+172.17.8.102   Ready                      12h       v1.7.11
+172.17.8.103   Ready                      12h       v1.7.11
 </pre></div>
 
 
 <hr />
 <p>以上で、Vagrant CoreOS Clusterの構築、及びkubectlのセットアップは完了です。</p>
-<h2 id="_2">参考リンク<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<dl>
-<dt>kubectl リファレンス(v1.7)</dt>
-<dd><a href="https://v1-7.docs.kubernetes.io/docs/user-guide/kubectl/v1.7/">https://v1-7.docs.kubernetes.io/docs/user-guide/kubectl/v1.7/</a></dd>
-</dl>
                 
                   
                 
