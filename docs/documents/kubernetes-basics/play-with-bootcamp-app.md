@@ -23,7 +23,7 @@ Kubernetesクラスターにサンプルアプリケーションをデプロイ�
 kubectl run kubernetes-bootcamp --image=docker.io/jocatalin/kubernetes-bootcamp:v1 --port=8080
 ```
 
-上記コマンドにより、サンプルアプリケーションのデプロイを管理する"Deployment"オブジェクトが作成されています。"Deployment"オブジェクトの情報を確認するために、以下のコマンドを実行してみてください。
+上記コマンドにより、サンプルアプリケーションのデプロイを管理するDeploymentオブジェクトが作成されています。Deploymentオブジェクトの情報を確認するために、以下のコマンドを実行してみてください。
 
 __Deploymentの一覧の取得__
 
@@ -76,7 +76,8 @@ Kubernetesのバージョン情報が、以下のようなJSON形式で取得で
 :fa-apple: __Mac__ / :fa-linux: __Linux__
 
 ```sh
-export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')
+export POD_NAME=$(kubectl get pods -o go-template \
+    --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')
 ```
 ```sh
 curl http://localhost:8001/api/v1/proxy/namespaces/default/pods/$POD_NAME/
@@ -85,7 +86,8 @@ curl http://localhost:8001/api/v1/proxy/namespaces/default/pods/$POD_NAME/
 :fa-windows: __Windows__
 
 ```bat
-$POD_NAME=kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{\"\n\"}}{{end}}'
+$POD_NAME=kubectl get pods -o go-template `
+    --template '{{range .items}}{{.metadata.name}}{{\"\n\"}}{{end}}'
 ```
 ```bat
 Invoke-RestMethod -Uri "http://localhost:8001/api/v1/proxy/namespaces/default/pods/$POD_NAME/"
@@ -202,42 +204,58 @@ NodePortモードでServiceを構成していますので、Nodeの所定のポ�
 
 :fa-apple: __Mac__ / :fa-linux: __Linux__
 
-    export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go-template='{{(index .spec.ports 0).nodePort}}')
+    export NODE_PORT=$(kubectl get services/kubernetes-bootcamp \
+        -o go-template='{{(index .spec.ports 0).nodePort}}')
 
 :fa-windows: __Windows__
 
-    $NODE_PORT=kubectl get services/kubernetes-bootcamp -o go-template='{{(index .spec.ports 0).nodePort}}'
+    $NODE_PORT=kubectl get services/kubernetes-bootcamp `
+        -o go-template='{{(index .spec.ports 0).nodePort}}'
 
-続いて、Nodeのホスト名を、環境変数NODE01に保存します。
+続いて、NodeのIPアドレスを環境変数NODE\_IP\_0, NODE\_IP\_1, ...に保存します。
 
 :fa-apple: __Mac__ / :fa-linux: __Linux__
 
-    export NODE01=172.17.8.102
-    export NODE02=172.17.8.103
+まず、NodeのIPアドレスを表示します。
+
+    kubectl get nodes -o yaml | grep address
+
+出力された内容のIPアドレスに当たる部分を、以下のように環境変数に格納していきます（以下の例で、IPアドレスを実際に出力された値に置き換えてください）。
+
+    export NODE_IP_0=172.17.8.102
+    export NODE_IP_1=172.17.8.103
+    ...
 
 :fa-windows: __Windows__
 
-    $NODE01=echo '172.17.8.102'
-    $NODE02=echo '172.17.8.103'
+まず、NodeのIPアドレスを表示します。
+
+    kubectl get nodes -o yaml | Select-String "address"
+
+出力された内容のIPアドレスに当たる部分を、以下のように環境変数に格納していきます（以下の例で、IPアドレスを実際に出力された値に置き換えてください）。
+
+    $NODE_IP_0=echo '172.17.8.102'
+    $NODE_IP_1=echo '172.17.8.103'
+    ...
 
 NodeのIPアドレス/ポート番号に対してHTTPリクエストを送信すると、1.で``kube proxy``を利用したときと同様の、bootcampの応答が返却されます。
 
 :fa-apple: __Mac__ / :fa-linux: __Linux__
 
-    curl http://${NODE01}:${NODE_PORT}/
+    curl http://${NODE_IP_0}:${NODE_PORT}/
 
 :fa-windows: __Windows__
 
-    Invoke-RestMethod -Uri "http://${NODE01}:${NODE_PORT}/"
+    Invoke-RestMethod -Uri "http://${NODE_IP_0}:${NODE_PORT}/"
 
 マルチノードのクラスターを構成している場合は、アクセス先のNodeを変更しても同じように応答が返却されることも確認してみてください。
 
 
-4. アプリケーションのスケールアウト
------------------------------------
-この時点では、bootcampはひとつのPodで稼働している状態です。ここでは、Deploymentに対してレプリカの数を指定することによって、Podをスケールアウトしてみます。
+4. アプリケーションのスケーリング
+---------------------------------
+この時点では、bootcampはひとつのPodで稼働している状態です。ここでは、Deploymentに対してレプリカの数を指定することによって、Podのスケールアウト/インを試してみます。
 
-### 4.1. Podの追加
+### 4.1. スケールアウト
 Deploymentに対してレプリカの数を指定することによって、そのDeploymentが管理するPodの数を増減することができます。
 
 レプリカの数を変更するには、``kubectl scale``コマンドを使用します。以下のように実行することで、bootcampのPodを管理するDeploymentに対して、レプリカ数を4にするよう指示します。
@@ -258,8 +276,12 @@ Podの一覧を表示してみます。
 
 上の例では、一部のPodは起動中の状態です。少し時間が経過すると全てのPodのSTATUSがRunningになります。
 
-### 4.2. Podへのルーティング
-sternで標準出力を確認すると、以下の様にPodが追加されていることがわかります。
+### 4.2. Serviceによるルーティングの様子の確認
+この時点で、クラスターには複数のbootcampのPodがデプロイされている状態です。sternでワイルドカードを指定してすることにより、これらのPodの標準出力を一度に観察してみます。以下のコマンドでsternを起動してください。
+
+    stern kubernetes-bootcamp-*
+
+以下の様に表示されます。これはPodの起動時のメッセージが4つのPod分表示されている状態です。
 
     + kubernetes-bootcamp-2457653786-txsp5 › kubernetes-bootcamp
     kubernetes-bootcamp-2457653786-txsp5 kubernetes-bootcamp Kubernetes Bootcamp App Started At: 2017-11-20T03:42:40.704Z | Running On:  kubernetes-bootcamp-2457653786-txsp5
@@ -273,7 +295,7 @@ sternで標準出力を確認すると、以下の様にPodが追加されてい
 
 sternは複数のPodからの標準出力を自動的に色分けして表示します。実際に各Podからの出力が色で識別できることを確認してください。
 
-何度かServiceにアクセスしてみると、複数のPodから応答が帰ってきていることを確認できます。
+続いて、Serviceに対して何度かリクエストを送信してみます。このとき、複数のPodから応答が返ってきていることを確認できます。
 
 :fa-apple: __Mac__ / :fa-linux: __Linux__
 
@@ -281,12 +303,15 @@ sternは複数のPodからの標準出力を自動的に色分けして表示し
 
 :fa-windows: __Windows__
 
-    > Invoke-RestMethod -Uri "http://${NODE01}:${NODE_PORT}/"
+    Invoke-RestMethod -Uri "http://${NODE01}:${NODE_PORT}/"
 
 
-同様にして、Podを2つに縮小することも可能です。
+### 4.3. スケールイン
+同様にしてPodを縮小することも可能です。以下のコマンドではレプリカを2つに縮小します。
 
     kubectl scale deployments/kubernetes-bootcamp --replicas=2
+
+同じようにリクエストを送信して、応答を返すPodの数が減っていることを確認してみてください。
 
 
 ---
