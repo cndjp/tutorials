@@ -3,6 +3,7 @@ Vagrant CoreOS Cluster
 [Kubernetes Vagrant CoreOS Cluster](https://github.com/pires/kubernetes-vagrant-coreos-cluster)にあるインストーラを利用して、Kubernetesクラスターを構成します。
 このインストーラーでは、ローカルPC上に複数のVirtualBox仮想マシンを立ち上げ、それらの上にKubernetesマルチノードクラスターを構成します。
 
+併せて、Kubernetesを操作するためのコマンドラインツールである、kubectlのセットアップも行います。
 
 前提条件
 --------
@@ -218,98 +219,8 @@ kubectl config use-context default-cluster
     172.17.8.103   Ready                      12h       v1.7.5
 
 
-3. 最初のアプリケーションを動かしてみる
----------------------------------------
-ここでは、簡単なサンプルアプリケーションをデプロイして、クラスターの動作確認をします。
-
-### 3.1. サンプルアプリケーションのデプロイ
-Kubernetesクラスターにサンプルアプリケーションをデプロイしてみます。以下のコマンドを実行します。
-
-```sh
-kubectl run kubernetes-bootcamp --image=docker.io/jocatalin/kubernetes-bootcamp:v1 --port=8080
-```
-
-!!!Note
-    このアプリケーションは、[Kubernetesの公式のインタラクティブ・チュートリアル](https://kubernetesbootcamp.github.io/kubernetes-bootcamp/)で利用しているものと同じものです。
-
-上記コマンドにより、サンプルアプリケーションのデプロイを管理する"Deployment"オブジェクトが作成されています。"Deployment"オブジェクトの情報を確認するために、以下のコマンドを実行してみてください。
-
-__Deploymentの一覧の取得__
-
-    kubectl get deployments
-
-__Deploymentの詳細情報の取得__
-
-    kubectl describe deployments/kubernetes-bootcamp
-
-### 3.2. アプリケーションへのアクセス
-アプリケーションにクラスターの外からアクセスするために、ここではkubectlの機能を使ってクラスター内に通じるプロキシを構成します。以下のコマンドを実行すると、localhostの8001ポートからクラスター内にアクセスできるようになります。
-
-    kubectl proxy
-
-まずは、Kubernetesのマスターノードで稼働しているapiserverに対してリクエストを送信し、プロキシが機能していることを確認します。
-
-:fa-apple: __Mac__ / :fa-linux: __Linux__
-
-```sh
-curl http://localhost:8001/version
-```
-
-:fa-windows: __Windows__
-
-```bat
-Invoke-RestMethod -Uri "http://localhost:8001/version"
-```
-
-Kubernetesのバージョン情報が、以下のようなJSON形式で取得できます。
-
-```json
-{
-  "major": "1",
-  "minor": "7",
-  "gitVersion": "v1.7.5",
-  "gitCommit": "17d7182a7ccbb167074be7a87f0a68bd00d58d97",
-  "gitTreeState": "clean",
-  "buildDate": "2017-08-31T08:56:23Z",
-  "goVersion": "go1.8.3",
-  "compiler": "gc",
-  "platform": "linux/amd
-}
-```
-
-いよいよアプリケーションにアクセスしてみます。以下のコマンドを順に実行してください。
-
-:fa-apple: __Mac__ / :fa-linux: __Linux__
-
-```sh
-export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')
-```
-```sh
-curl http://localhost:8001/api/v1/proxy/namespaces/default/pods/$POD_NAME/
-```
-
-:fa-windows: __Windows__
-
-```bat
-$POD_NAME=kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{\"\n\"}}{{end}}'
-```
-```bat
-Invoke-RestMethod -Uri "http://localhost:8001/api/v1/proxy/namespaces/default/pods/$POD_NAME/"
-```
-
-正しく動作していれば、以下のようなレスポンスが返却されます。
-
-    Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-2457653786-vdgr2 | v=1
-
-
-### 3.3. サンプルアプリケーションの削除
-デプロイしたアプリケーションを削除するには、Deploymentを削除します。
-
-    kubectl delete deployment kubernetes-bootcamp
-
-
 ---
-以上で、Vagrant CoreOS Clusterの構築は完了です。
+以上で、Vagrant CoreOS Clusterの構築、及びkubectlのセットアップは完了です。
 
 
 参考リンク

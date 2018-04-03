@@ -29,6 +29,7 @@ extra_css:
     - 'stylesheets/extra.css'
 pages:
     - Home: index.md
-    - Create Loacal Cluster:
+    - ローカルクラスターの作成:
         - Vagrant CoreOS Cluster: 'documents/create-local-cluster/vagrant-coreos-cluster.md'
-        - minikube: 'documents/create-local-cluster/minikube.md'
+    - Kubernetesの基本:
+        - 最初のアプリケーションを動かしてみる: 'documents/kubernetes-basics/play-with-bootcamp-app.md'
