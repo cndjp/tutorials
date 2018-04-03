@@ -431,23 +431,30 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4" title="4. アプリケーションのスケールアウト" class="md-nav__link">
-    4. アプリケーションのスケールアウト
+  <a href="#4" title="4. アプリケーションのスケーリング" class="md-nav__link">
+    4. アプリケーションのスケーリング
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-pod" title="4.1. Podの追加" class="md-nav__link">
-    4.1. Podの追加
+  <a href="#41" title="4.1. スケールアウト" class="md-nav__link">
+    4.1. スケールアウト
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-pod" title="4.2. Podへのルーティング" class="md-nav__link">
-    4.2. Podへのルーティング
+  <a href="#42-service" title="4.2. Serviceによるルーティングの様子の確認" class="md-nav__link">
+    4.2. Serviceによるルーティングの様子の確認
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" title="4.3. スケールイン" class="md-nav__link">
+    4.3. スケールイン
   </a>
   
 </li>
@@ -589,23 +596,30 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4" title="4. アプリケーションのスケールアウト" class="md-nav__link">
-    4. アプリケーションのスケールアウト
+  <a href="#4" title="4. アプリケーションのスケーリング" class="md-nav__link">
+    4. アプリケーションのスケーリング
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-pod" title="4.1. Podの追加" class="md-nav__link">
-    4.1. Podの追加
+  <a href="#41" title="4.1. スケールアウト" class="md-nav__link">
+    4.1. スケールアウト
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-pod" title="4.2. Podへのルーティング" class="md-nav__link">
-    4.2. Podへのルーティング
+  <a href="#42-service" title="4.2. Serviceによるルーティングの様子の確認" class="md-nav__link">
+    4.2. Serviceによるルーティングの様子の確認
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" title="4.3. スケールイン" class="md-nav__link">
+    4.3. スケールイン
   </a>
   
 </li>
@@ -653,7 +667,7 @@
 </pre></div>
 
 
-<p>上記コマンドにより、サンプルアプリケーションのデプロイを管理する"Deployment"オブジェクトが作成されています。"Deployment"オブジェクトの情報を確認するために、以下のコマンドを実行してみてください。</p>
+<p>上記コマンドにより、サンプルアプリケーションのデプロイを管理するDeploymentオブジェクトが作成されています。Deploymentオブジェクトの情報を確認するために、以下のコマンドを実行してみてください。</p>
 <p><strong>Deploymentの一覧の取得</strong></p>
 <div class="codehilite"><pre><span></span>kubectl get deployments
 </pre></div>
@@ -702,7 +716,8 @@
 
 <p>実際にアプリケーションにアクセスしてみます。以下のコマンドを順に実行してください。</p>
 <p><i class="fa fa-apple"></i> <strong>Mac</strong> / <i class="fa fa-linux"></i> <strong>Linux</strong></p>
-<div class="codehilite"><pre><span></span><span class="nb">export</span> <span class="nv">POD_NAME</span><span class="o">=</span><span class="k">$(</span>kubectl get pods -o go-template --template <span class="s1">&#39;{{range .items}}{{.metadata.name}}{{&quot;\n&quot;}}{{end}}&#39;</span><span class="k">)</span>
+<div class="codehilite"><pre><span></span><span class="nb">export</span> <span class="nv">POD_NAME</span><span class="o">=</span><span class="k">$(</span>kubectl get pods -o go-template <span class="se">\</span>
+    --template <span class="s1">&#39;{{range .items}}{{.metadata.name}}{{&quot;\n&quot;}}{{end}}&#39;</span><span class="k">)</span>
 </pre></div>
 
 
@@ -711,7 +726,8 @@
 
 
 <p><i class="fa fa-windows"></i> <strong>Windows</strong></p>
-<div class="codehilite"><pre><span></span>$POD_NAME=kubectl get pods -o go-template --template &#39;{{range .items}}{{.metadata.name}}{{\<span class="s2">&quot;\n\&quot;</span>}}{{end}}&#39;
+<div class="codehilite"><pre><span></span>$POD_NAME=kubectl get pods -o go-template `
+    --template &#39;{{range .items}}{{.metadata.name}}{{\<span class="s2">&quot;\n\&quot;</span>}}{{end}}&#39;
 </pre></div>
 
 
@@ -825,43 +841,59 @@
 <p>NodePortモードでServiceを構成していますので、Nodeの所定のポート番号から、アプリケーションにアクセスすることができます。</p>
 <p>以下、この後の手順を簡単にするため、必要な値を環境変数に入れておきます。まず、Nodeの公開されているポート番号を、環境変数NODE_PORTに保存します。</p>
 <p><i class="fa fa-apple"></i> <strong>Mac</strong> / <i class="fa fa-linux"></i> <strong>Linux</strong></p>
-<div class="codehilite"><pre><span></span><span class="x">export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go-template=&#39;</span><span class="cp">{{</span><span class="o">(</span><span class="nv">index</span> <span class="nv">.spec.ports</span> <span class="m">0</span><span class="o">)</span><span class="nv">.nodePort</span><span class="cp">}}</span><span class="x">&#39;)</span>
+<div class="codehilite"><pre><span></span><span class="x">export NODE_PORT=$(kubectl get services/kubernetes-bootcamp \</span>
+<span class="x">    -o go-template=&#39;</span><span class="cp">{{</span><span class="o">(</span><span class="nv">index</span> <span class="nv">.spec.ports</span> <span class="m">0</span><span class="o">)</span><span class="nv">.nodePort</span><span class="cp">}}</span><span class="x">&#39;)</span>
 </pre></div>
 
 
 <p><i class="fa fa-windows"></i> <strong>Windows</strong></p>
-<div class="codehilite"><pre><span></span><span class="x">$NODE_PORT=kubectl get services/kubernetes-bootcamp -o go-template=&#39;</span><span class="cp">{{</span><span class="o">(</span><span class="nv">index</span> <span class="nv">.spec.ports</span> <span class="m">0</span><span class="o">)</span><span class="nv">.nodePort</span><span class="cp">}}</span><span class="x">&#39;</span>
+<div class="codehilite"><pre><span></span><span class="x">$NODE_PORT=kubectl get services/kubernetes-bootcamp `</span>
+<span class="x">    -o go-template=&#39;</span><span class="cp">{{</span><span class="o">(</span><span class="nv">index</span> <span class="nv">.spec.ports</span> <span class="m">0</span><span class="o">)</span><span class="nv">.nodePort</span><span class="cp">}}</span><span class="x">&#39;</span>
 </pre></div>
 
 
-<p>続いて、Nodeのホスト名を、環境変数NODE01に保存します。</p>
+<p>続いて、NodeのIPアドレスを環境変数NODE_IP_0, NODE_IP_1, ...に保存します。</p>
 <p><i class="fa fa-apple"></i> <strong>Mac</strong> / <i class="fa fa-linux"></i> <strong>Linux</strong></p>
-<div class="codehilite"><pre><span></span>export NODE01=172.17.8.102
-export NODE02=172.17.8.103
+<p>まず、NodeのIPアドレスを表示します。</p>
+<div class="codehilite"><pre><span></span>kubectl get nodes -o yaml | grep address
+</pre></div>
+
+
+<p>出力された内容のIPアドレスに当たる部分を、以下のように環境変数に格納していきます（以下の例で、IPアドレスを実際に出力された値に置き換えてください）。</p>
+<div class="codehilite"><pre><span></span>export NODE_IP_0=172.17.8.102
+export NODE_IP_1=172.17.8.103
+...
 </pre></div>
 
 
 <p><i class="fa fa-windows"></i> <strong>Windows</strong></p>
-<div class="codehilite"><pre><span></span>$NODE01=echo &#39;172.17.8.102&#39;
-$NODE02=echo &#39;172.17.8.103&#39;
+<p>まず、NodeのIPアドレスを表示します。</p>
+<div class="codehilite"><pre><span></span>kubectl get nodes -o yaml | Select-String &quot;address&quot;
+</pre></div>
+
+
+<p>出力された内容のIPアドレスに当たる部分を、以下のように環境変数に格納していきます（以下の例で、IPアドレスを実際に出力された値に置き換えてください）。</p>
+<div class="codehilite"><pre><span></span>$NODE_IP_0=echo &#39;172.17.8.102&#39;
+$NODE_IP_1=echo &#39;172.17.8.103&#39;
+...
 </pre></div>
 
 
 <p>NodeのIPアドレス/ポート番号に対してHTTPリクエストを送信すると、1.で<code>kube proxy</code>を利用したときと同様の、bootcampの応答が返却されます。</p>
 <p><i class="fa fa-apple"></i> <strong>Mac</strong> / <i class="fa fa-linux"></i> <strong>Linux</strong></p>
-<div class="codehilite"><pre><span></span>curl http://<span class="cp">${</span><span class="n">NODE01</span><span class="cp">}</span>:<span class="cp">${</span><span class="n">NODE_PORT</span><span class="cp">}</span>/
+<div class="codehilite"><pre><span></span>curl http://<span class="cp">${</span><span class="n">NODE_IP_0</span><span class="cp">}</span>:<span class="cp">${</span><span class="n">NODE_PORT</span><span class="cp">}</span>/
 </pre></div>
 
 
 <p><i class="fa fa-windows"></i> <strong>Windows</strong></p>
-<div class="codehilite"><pre><span></span>Invoke-RestMethod -Uri &quot;http://<span class="cp">${</span><span class="n">NODE01</span><span class="cp">}</span>:<span class="cp">${</span><span class="n">NODE_PORT</span><span class="cp">}</span>/&quot;
+<div class="codehilite"><pre><span></span>Invoke-RestMethod -Uri &quot;http://<span class="cp">${</span><span class="n">NODE_IP_0</span><span class="cp">}</span>:<span class="cp">${</span><span class="n">NODE_PORT</span><span class="cp">}</span>/&quot;
 </pre></div>
 
 
 <p>マルチノードのクラスターを構成している場合は、アクセス先のNodeを変更しても同じように応答が返却されることも確認してみてください。</p>
-<h2 id="4">4. アプリケーションのスケールアウト<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<p>この時点では、bootcampはひとつのPodで稼働している状態です。ここでは、Deploymentに対してレプリカの数を指定することによって、Podをスケールアウトしてみます。</p>
-<h3 id="41-pod">4.1. Podの追加<a class="headerlink" href="#41-pod" title="Permanent link">&para;</a></h3>
+<h2 id="4">4. アプリケーションのスケーリング<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>この時点では、bootcampはひとつのPodで稼働している状態です。ここでは、Deploymentに対してレプリカの数を指定することによって、Podのスケールアウト/インを試してみます。</p>
+<h3 id="41">4.1. スケールアウト<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
 <p>Deploymentに対してレプリカの数を指定することによって、そのDeploymentが管理するPodの数を増減することができます。</p>
 <p>レプリカの数を変更するには、<code>kubectl scale</code>コマンドを使用します。以下のように実行することで、bootcampのPodを管理するDeploymentに対して、レプリカ数を4にするよう指示します。</p>
 <div class="codehilite"><pre><span></span>kubectl scale deployments/kubernetes-bootcamp --replicas=4
@@ -883,8 +915,13 @@ kubernetes-bootcamp-2457653786-txsp5   1/1       Running             0          
 
 
 <p>上の例では、一部のPodは起動中の状態です。少し時間が経過すると全てのPodのSTATUSがRunningになります。</p>
-<h3 id="42-pod">4.2. Podへのルーティング<a class="headerlink" href="#42-pod" title="Permanent link">&para;</a></h3>
-<p>sternで標準出力を確認すると、以下の様にPodが追加されていることがわかります。</p>
+<h3 id="42-service">4.2. Serviceによるルーティングの様子の確認<a class="headerlink" href="#42-service" title="Permanent link">&para;</a></h3>
+<p>この時点で、クラスターには複数のbootcampのPodがデプロイされている状態です。sternでワイルドカードを指定してすることにより、これらのPodの標準出力を一度に観察してみます。以下のコマンドでsternを起動してください。</p>
+<div class="codehilite"><pre><span></span>stern kubernetes-bootcamp-*
+</pre></div>
+
+
+<p>以下の様に表示されます。これはPodの起動時のメッセージが4つのPod分表示されている状態です。</p>
 <div class="codehilite"><pre><span></span>+ kubernetes-bootcamp-2457653786-txsp5 › kubernetes-bootcamp
 kubernetes-bootcamp-2457653786-txsp5 kubernetes-bootcamp Kubernetes Bootcamp App Started At: 2017-11-20T03:42:40.704Z | Running On:  kubernetes-bootcamp-2457653786-txsp5
 kubernetes-bootcamp-2457653786-txsp5 kubernetes-bootcamp
@@ -898,22 +935,24 @@ kubernetes-bootcamp-2457653786-kvqdj kubernetes-bootcamp
 
 
 <p>sternは複数のPodからの標準出力を自動的に色分けして表示します。実際に各Podからの出力が色で識別できることを確認してください。</p>
-<p>何度かServiceにアクセスしてみると、複数のPodから応答が帰ってきていることを確認できます。</p>
+<p>続いて、Serviceに対して何度かリクエストを送信してみます。このとき、複数のPodから応答が返ってきていることを確認できます。</p>
 <p><i class="fa fa-apple"></i> <strong>Mac</strong> / <i class="fa fa-linux"></i> <strong>Linux</strong></p>
 <div class="codehilite"><pre><span></span>curl http://<span class="cp">${</span><span class="n">NODE01</span><span class="cp">}</span>:<span class="cp">${</span><span class="n">NODE_PORT</span><span class="cp">}</span>/
 </pre></div>
 
 
 <p><i class="fa fa-windows"></i> <strong>Windows</strong></p>
-<div class="codehilite"><pre><span></span>&gt; Invoke-RestMethod -Uri &quot;http://<span class="cp">${</span><span class="n">NODE01</span><span class="cp">}</span>:<span class="cp">${</span><span class="n">NODE_PORT</span><span class="cp">}</span>/&quot;
+<div class="codehilite"><pre><span></span>Invoke-RestMethod -Uri &quot;http://<span class="cp">${</span><span class="n">NODE01</span><span class="cp">}</span>:<span class="cp">${</span><span class="n">NODE_PORT</span><span class="cp">}</span>/&quot;
 </pre></div>
 
 
-<p>同様にして、Podを2つに縮小することも可能です。</p>
+<h3 id="43">4.3. スケールイン<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<p>同様にしてPodを縮小することも可能です。以下のコマンドではレプリカを2つに縮小します。</p>
 <div class="codehilite"><pre><span></span>kubectl scale deployments/kubernetes-bootcamp --replicas=2
 </pre></div>
 
 
+<p>同じようにリクエストを送信して、応答を返すPodの数が減っていることを確認してみてください。</p>
 <hr />
 <p>以上で本チュートリアルは終了です。</p>
                 
