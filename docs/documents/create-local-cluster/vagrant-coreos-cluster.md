@@ -162,7 +162,7 @@ vagrant up
     node-01                   running (virtualbox)
     node-02                   running (virtualbox)
 
-### 1-5. クラスターの停止/再起動
+### 1.5. クラスターの停止/再起動
 ハンズオン終了後にクラスターを停止/再起動/削除する際には、以下の操作を行ってください
 
 __停止__
