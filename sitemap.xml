@@ -17,8 +17,12 @@
      <changefreq>daily</changefreq>
     </url>
         
+    
+
+    
+        
     <url>
-     <loc>/documents/create-local-cluster/minikube/</loc>
+     <loc>/documents/kubernetes-basics/play-with-bootcamp-app/</loc>
      <lastmod>2018-04-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
