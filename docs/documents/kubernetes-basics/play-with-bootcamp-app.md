@@ -113,7 +113,7 @@ Kubernetes上で動作するアプリケーションの動作状況を確認す�
 
     kubectl logs [Pod名]
 
-前章で、環境変数POD_NAMEに、現在稼働しているbootcampのPod名を保存しましたので、以下のようにコマンドを呼び出すことができます。
+前章で、環境変数POD\_NAMEに、現在稼働しているbootcampのPod名を保存しましたので、以下のようにコマンドを呼び出すことができます。
 
     kubectl logs $POD_NAME
 
