@@ -1,17 +1,33 @@
-# Welcome to MkDocs
+Cloud Native Developers JP のハンズオンチュートリアルへようこそ
+===============================================================
+これは[Cloud Native Developers JP 勉強会](https://cnd.connpass.com/)のハンズオンチュートリアルです。
 
-For full documentation visit [mkdocs.org](http://mkdocs.org).
+Kubernetesを中心としたCloud NativeなOSSを、手を動かしながら学べるコンテンツを提供します。勉強会に参加された方もそうでない方も、ご自由に活用ください。
 
-## Commands
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
+チュートリアルの始め方
+----------------------
+[Contents](#contents)にあるどの項目からでも始められます。お好きなものをクリックして開始してください。
 
-## Project layout
+（必要な環境要件については、各チュートリアルの冒頭の指示に従ってください）
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+
+Contents
+--------
+
+#### Kubernetesの基礎
+
+- [最初のアプリケーションを動かしてみる](documents/kubernetes-basics/play-with-bootcamp-app.md)
+:   簡単なサンプルアプリケーションを使って、Kubernetes上へのコンテナのデプロイ、スケールアウト、スケールイン等のオペレーションを体験します。
+
+
+Appendix.
+---------
+
+#### ローカルKubernetesクラスターの作成
+
+- [Vagrant CoreOS Cluster](documents/create-local-cluster/vagrant-coreos-cluster.md)
+:   Vagrantのインストールスクリプトを利用してKubernetesクラスターを構成します。 この手順では、ローカルPC上に複数のVirtualBox仮想マシンを立ち上げ、それらの上にKubernetesのマルチノードクラスターを構成します。
+
+- minikube
+:   (Commint Soon)
