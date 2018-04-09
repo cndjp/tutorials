@@ -592,7 +592,7 @@
 
 
 <p><i class="fa fa-windows"></i> <strong>Windows</strong></p>
-<div class="codehilite"><pre><span></span><span class="k">mkdir</span> <span class="nv">%USERPROFILE%</span>\k8s-logging; cd <span class="nv">%USERPROFILE%</span>\k8s-logging
+<div class="codehilite"><pre><span></span><span class="k">mkdir</span> $env:USERPROFILE\k8s-logging; cd $env:USERPROFILE\k8s-logging
 </pre></div>
 
 
@@ -790,7 +790,7 @@ two-files-logging-counter   3/3       Running             0          9s
 
 
 <p>次にPodの詳細情報を表示してみます。</p>
-<div class="codehilite"><pre><span></span>kubectl describe pod/two-files-logging-counter
+<div class="codehilite"><pre><span></span>kubectl describe pod two-files-logging-counter
 </pre></div>
 
 
