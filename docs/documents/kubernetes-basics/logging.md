@@ -33,7 +33,7 @@ mkdir ~/k8s-logging && cd ~/k8s-logging
 :fa-windows: __Windows__
 
 ```bat
-mkdir %USERPROFILE%\k8s-logging; cd %USERPROFILE%\k8s-logging
+mkdir $env:USERPROFILE\k8s-logging; cd $env:USERPROFILE\k8s-logging
 ```
 
 今回利用するサンプルアプリケーションは、manifestファイルに定義を記述した上で、それを利用してデプロイします。まず、counter.ymlという名前で、空のテキストファイルを作成します。
