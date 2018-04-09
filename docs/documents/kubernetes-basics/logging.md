@@ -226,7 +226,7 @@ Kubernetesのマスターノードが指示を受け付けると、以下のよ�
 
 次にPodの詳細情報を表示してみます。
 
-    kubectl describe pod/two-files-logging-counter
+    kubectl describe pod two-files-logging-counter
 
 Containers:以下に、Podに含まれるコンテナの情報が表示されており、two-files-logging-countと2つのsidecarコンテナがあることがわかります。
 
