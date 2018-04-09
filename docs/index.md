@@ -20,6 +20,8 @@ Contents
 - [最初のアプリケーションを動かしてみる](documents/kubernetes-basics/play-with-bootcamp-app.md)
 :   簡単なサンプルアプリケーションを使って、Kubernetes上へのコンテナのデプロイ、スケールアウト、スケールイン等のオペレーションを体験します。
 
+- [Kubernetesにおけるログの収集](documents/kubernetes-basics/logging.md)
+:   Kubernetesクラスター上で動作するコンテナのログを、確認、収集する手順を体験します。
 
 Appendix.
 ---------
