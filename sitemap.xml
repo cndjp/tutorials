@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-04-10</lastmod>
+     <lastmod>2018-04-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -13,13 +13,13 @@
         
     <url>
      <loc>/documents/kubernetes-basics/play-with-bootcamp-app/</loc>
-     <lastmod>2018-04-10</lastmod>
+     <lastmod>2018-04-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/documents/kubernetes-basics/logging/</loc>
-     <lastmod>2018-04-10</lastmod>
+     <lastmod>2018-04-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -29,7 +29,13 @@
         
     <url>
      <loc>/documents/create-local-cluster/vagrant-coreos-cluster/</loc>
-     <lastmod>2018-04-10</lastmod>
+     <lastmod>2018-04-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/documents/create-local-cluster/minikube/</loc>
+     <lastmod>2018-04-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         

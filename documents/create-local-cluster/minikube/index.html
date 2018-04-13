@@ -1,0 +1,822 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="クリップボードへコピー">
+      
+        <meta name="lang:clipboard.copied" content="コピーしました">
+      
+        <meta name="lang:search.language" content="en, jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="何も見つかりませんでした">
+      
+        <meta name="lang:search.result.one" content="1件見つかりました">
+      
+        <meta name="lang:search.result.other" content="#件見つかりました">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-　、。，．]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.1">
+    
+    
+      
+        <title>minikube - Cloud Native Developers JP - ハンズオンチュートリアル</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.78aab2dc.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#minikube" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../../.." title="Cloud Native Developers JP - ハンズオンチュートリアル" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">cloud</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Cloud Native Developers JP - ハンズオンチュートリアル
+              </span>
+              <span class="md-header-nav__topic">
+                minikube
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            検索キーワードを入力してください
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cndjp/tutorials/" title="リポジトリへ" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cndjp/tutorials
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon">cloud</i>
+      
+    </span>
+    Cloud Native Developers JP - ハンズオンチュートリアル
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cndjp/tutorials/" title="リポジトリへ" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cndjp/tutorials
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Kubernetesの基礎
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Kubernetesの基礎
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../kubernetes-basics/play-with-bootcamp-app/" title="最初のアプリケーションを動かしてみる" class="md-nav__link">
+      最初のアプリケーションを動かしてみる
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../kubernetes-basics/logging/" title="Kubernetesにおけるログの収集" class="md-nav__link">
+      Kubernetesにおけるログの収集
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      ローカルクラスターの作成
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        ローカルクラスターの作成
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vagrant-coreos-cluster/" title="Vagrant CoreOS Cluster" class="md-nav__link">
+      Vagrant CoreOS Cluster
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        minikube
+      </label>
+    
+    <a href="./" title="minikube" class="md-nav__link md-nav__link--active">
+      minikube
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目次</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-windows-pcminikube" title="1. Windows PCでのminikubeのインストール手順" class="md-nav__link">
+    1. Windows PCでのminikubeのインストール手順
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" title="前提条件" class="md-nav__link">
+    前提条件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-chocolatey" title="1.1. chocolateyのインストール" class="md-nav__link">
+    1.1. chocolateyのインストール
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-virtualbox" title="1.2. VirtualBoxのインストール" class="md-nav__link">
+    1.2. VirtualBoxのインストール
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-kubectl" title="1.3. kubectlのインストール" class="md-nav__link">
+    1.3. kubectlのインストール
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-minikube" title="1.4. minikubeのインストール" class="md-nav__link">
+    1.4. minikubeのインストール
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-macos-xminikube" title="2. MacOS Xでのminikubeのインストール手順" class="md-nav__link">
+    2. MacOS Xでのminikubeのインストール手順
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-minikubekubernetes" title="3. minikubeによるKubernetesクラスターの操作" class="md-nav__link">
+    3. minikubeによるKubernetesクラスターの操作
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" title="3.1. クラスターの起動と接続確認" class="md-nav__link">
+    3.1. クラスターの起動と接続確認
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" title="3.2. クラスターの停止とクリーンアップ" class="md-nav__link">
+    3.2. クラスターの停止とクリーンアップ
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目次</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-windows-pcminikube" title="1. Windows PCでのminikubeのインストール手順" class="md-nav__link">
+    1. Windows PCでのminikubeのインストール手順
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" title="前提条件" class="md-nav__link">
+    前提条件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-chocolatey" title="1.1. chocolateyのインストール" class="md-nav__link">
+    1.1. chocolateyのインストール
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-virtualbox" title="1.2. VirtualBoxのインストール" class="md-nav__link">
+    1.2. VirtualBoxのインストール
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-kubectl" title="1.3. kubectlのインストール" class="md-nav__link">
+    1.3. kubectlのインストール
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-minikube" title="1.4. minikubeのインストール" class="md-nav__link">
+    1.4. minikubeのインストール
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-macos-xminikube" title="2. MacOS Xでのminikubeのインストール手順" class="md-nav__link">
+    2. MacOS Xでのminikubeのインストール手順
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-minikubekubernetes" title="3. minikubeによるKubernetesクラスターの操作" class="md-nav__link">
+    3. minikubeによるKubernetesクラスターの操作
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" title="3.1. クラスターの起動と接続確認" class="md-nav__link">
+    3.1. クラスターの起動と接続確認
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" title="3.2. クラスターの停止とクリーンアップ" class="md-nav__link">
+    3.2. クラスターの停止とクリーンアップ
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cndjp/tutorials/edit/master/docs/documents/create-local-cluster/minikube.md" title="編集" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="minikube">minikube<a class="headerlink" href="#minikube" title="Permanent link">&para;</a></h1>
+<p>ここでは、minikubeを利用してKubernetesクラスターを構成します。minikubeはKubernetesの公式GitHubグループ配下で開発されているツールで、ローカルPCに立ち上げた仮想マシン上に、Kubernetesのシングルノードクラスターを構成することができます。</p>
+<p>ここでは、Windows及びMacOS Xで、仮想マシンのハイパーバイザーとしてVirtualBoxを使う場合の、minikubeのインストール手順を記します。併せて、Kubernetesを操作するためのコマンドラインツールである、kubectlのセットアップも行います。</p>
+<p>使用するマシンのOSに合わせて、以下のリンクから手順に進んでください。</p>
+<ul>
+<li><a href="#1-windows-pcminikube"><i class="fa fa-windows"></i> Windows</a></li>
+<li><a href="#2-macos-xminikube"><i class="fa fa-apple"></i> MacOS X</a>（準備中）</li>
+</ul>
+<h2 id="1-windows-pcminikube">1. Windows PCでのminikubeのインストール手順<a class="headerlink" href="#1-windows-pcminikube" title="Permanent link">&para;</a></h2>
+<p>Windows PC上にminikubeをインストールする手順を記します。ここでは、Windowsのパッケージマネージャである、<a href="https://chocolatey.org/">chocolatey</a>を使ってインストールをおこないます。</p>
+<h3 id="_1">前提条件<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Windows 10 64bit</li>
+<li>管理者権限を持ったWindowsユーザーアカウントでログオンしていること</li>
+</ul>
+<h3 id="11-chocolatey">1.1. chocolateyのインストール<a class="headerlink" href="#11-chocolatey" title="Permanent link">&para;</a></h3>
+<p>管理者権限でWindows PowerShellを起動し、以下のコマンドを実行します。</p>
+<div class="codehilite"><pre><span></span>Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;))
+</pre></div>
+
+
+<p>インストールプロセスの間、以下のような内容で始まるメッセージが表示されます。インストールが完了するまで1分程度待ちます。</p>
+<div class="codehilite"><pre><span></span>Getting latest version of the Chocolatey package for download.
+Getting Chocolatey from https://chocolatey.org/api/v2/package/chocolatey/0.10.10.
+…
+</pre></div>
+
+
+<p>インストールが完了したら以下のコマンドでバージョン情報を表示し、chocolateyを実行できることを確認します。</p>
+<div class="codehilite"><pre><span></span>choco -v
+</pre></div>
+
+
+<p>バージョン情報は以下のように表示されます。</p>
+<div class="codehilite"><pre><span></span>0.10.10
+</pre></div>
+
+
+<p>以上でchocolateyのインストールは完了です。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>chocolateyでソフトウェアをインストールするには、必ず管理者権限で立ち上げたPowerShell上で実行する必要があります。以降の手順も同様ですのでご注意ください。</p>
+</div>
+<h3 id="12-virtualbox">1.2. VirtualBoxのインストール<a class="headerlink" href="#12-virtualbox" title="Permanent link">&para;</a></h3>
+<p>chocolateyでVirtualBoxをインストールします。以下のコマンドを実行してください。</p>
+<div class="codehilite"><pre><span></span>choco install virtualbox
+</pre></div>
+
+
+<p>途中、インストール続行の確認のメッセージが表示されるので、<span class="keys"><kbd class="key-y">Y</kbd><span>+</span><kbd class="key-enter">Enter</kbd></span>を入力します。</p>
+<div class="codehilite"><pre><span></span>Do you want to run the script?([Y]es/[N]o/[P]rint): y
+</pre></div>
+
+
+<p>以下のようなメッセージが表示されたら、インストール完了です。</p>
+<div class="codehilite"><pre><span></span>Chocolatey installed 1/1 packages.
+ See the log for details (C:\ProgramData\chocolatey\logs\chocolatey.log).
+</pre></div>
+
+
+<h3 id="13-kubectl">1.3. kubectlのインストール<a class="headerlink" href="#13-kubectl" title="Permanent link">&para;</a></h3>
+<p>同じくchocolateyでkubectlをインストールします。以下のコマンドを実行してください。</p>
+<div class="codehilite"><pre><span></span>choco install kubernetes-cli
+</pre></div>
+
+
+<p>途中、インストール続行の確認のメッセージが表示されるので、<span class="keys"><kbd class="key-y">Y</kbd><span>+</span><kbd class="key-enter">Enter</kbd></span>を入力します。</p>
+<div class="codehilite"><pre><span></span>Do you want to run the script?([Y]es/[N]o/[P]rint): y
+</pre></div>
+
+
+<p>インストールが完了したら、以下のコマンドでバージョン情報を表示し、kubectlを実行できることを確認します。</p>
+<div class="codehilite"><pre><span></span>kubectl version
+</pre></div>
+
+
+<p>バージョン情報は以下のように表示されます。</p>
+<div class="codehilite"><pre><span></span>Client Version: version.Info{Major:&quot;1&quot;, Minor:&quot;10&quot;, GitVersion:&quot;v1.10.1&quot;, GitCommit:&quot;d4ab47518836c750f9949b9e0d387f20fb92260b&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2018-04-12T14:26:04Z&quot;, GoVersion:&quot;go1.9.3&quot;, Compiler:&quot;gc&quot;, Platform:&quot;windows/amd64&quot;}
+Unable to connect to the server: dial tcp [::1]:8080: connectex: No connection could be made because the target machine actively refused it.
+</pre></div>
+
+
+<h3 id="14-minikube">1.4. minikubeのインストール<a class="headerlink" href="#14-minikube" title="Permanent link">&para;</a></h3>
+<p>ここでもchocolateyを使います。minikubeをインストールするには以下のコマンドを実行します。</p>
+<div class="codehilite"><pre><span></span>choco install minikube
+</pre></div>
+
+
+<p>インストールが完了したら、以下のコマンドでバージョン情報を表示し、kubectlを実行できることを確認します。</p>
+<div class="codehilite"><pre><span></span>minikube version
+</pre></div>
+
+
+<p>バージョン情報は以下のように表示されます。</p>
+<div class="codehilite"><pre><span></span>minikube version: v0.26.0
+</pre></div>
+
+
+<p>以上で、Windows PCでのminikubeのインストールは完了です。<a href="#3-minikubekubernetes">3. minikubeによるKubernetesクラスターの操作</a>の手順に進んでください。</p>
+<h2 id="2-macos-xminikube">2. MacOS Xでのminikubeのインストール手順<a class="headerlink" href="#2-macos-xminikube" title="Permanent link">&para;</a></h2>
+<p>（準備中）</p>
+<h2 id="3-minikubekubernetes">3. minikubeによるKubernetesクラスターの操作<a class="headerlink" href="#3-minikubekubernetes" title="Permanent link">&para;</a></h2>
+<p>ここでは、minikubeでクラスターの起動／停止などの基本的な操作をおこなってみます。</p>
+<h3 id="31">3.1. クラスターの起動と接続確認<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>minikubeクラスターを起動するには、以下のコマンドを実行します。</p>
+<div class="codehilite"><pre><span></span>minikube start
+</pre></div>
+
+
+<p>Windowsでは、初回の実行時にユーザーアカウント制御のダイアログが表示される場合があります。その場合、コンピューターへの操作を許可する旨のボタンをクリックしてください。</p>
+<p><code>minikube start</code>コマンドを実行すると、kubectlに対して自動的にminikubeクラスターへの接続設定がおこなわれます。以下のコマンドを実行して、kubectlでクラスターのNodeの情報が取得できることを確認してください。</p>
+<div class="codehilite"><pre><span></span>kubectl get nodes
+</pre></div>
+
+
+<p>クラスターに接続できていれば、以下のような結果が表示されます。</p>
+<div class="codehilite"><pre><span></span>NAME       STATUS    ROLES     AGE       VERSION
+minikube   Ready     &lt;none&gt;    7h        v1.9.0
+</pre></div>
+
+
+<p>また、<code>minikube status</code>を実行すると、クラスターの起動状態を確認できます。</p>
+<div class="codehilite"><pre><span></span>minikube status
+</pre></div>
+
+
+<p>クラスタの起動中に上記コマンドを実行すると、以下のような結果が表示されます。</p>
+<div class="codehilite"><pre><span></span><span class="n">minikube</span><span class="o">:</span> <span class="n">Running</span>
+<span class="n">cluster</span><span class="o">:</span> <span class="n">Running</span>
+<span class="n">kubectl</span><span class="o">:</span> <span class="n">Correctly</span> <span class="n">Configured</span><span class="o">:</span> <span class="n">pointing</span> <span class="n">to</span> <span class="n">minikube</span><span class="o">-</span><span class="n">vm</span> <span class="n">at</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">39.52</span>
+</pre></div>
+
+
+<h3 id="32">3.2. クラスターの停止とクリーンアップ<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p>minikubeクラスターを停止するには、以下のコマンドを実行します。</p>
+<div class="codehilite"><pre><span></span>minikube stop
+</pre></div>
+
+
+<p>クラスターが停止した状態で<code>minikube start</code>を実行するとクラスターを再起動できます。また、クラスターを仮想マシンごと削除してクリーンアップしたい場合には、<code>minikube delete</code>を実行します。</p>
+<div class="codehilite"><pre><span></span>minikube delete
+</pre></div>
+
+
+<hr />
+<p>以上で、minikubeによるKubernetesクラスターの構築、及びkubectlのセットアップは完了です。</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../vagrant-coreos-cluster/" title="Vagrant CoreOS Cluster" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前
+                </span>
+                Vagrant CoreOS Cluster
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+      <a href="https://github.com/cndjp" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.8eb9be28.js"></script>
+      
+        
+        
+          
+          <script src="../../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+          
+            
+              
+                <script src="../../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+            <script src="../../../assets/javascripts/lunr/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"0.17.3",url:{base:"../../.."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>
