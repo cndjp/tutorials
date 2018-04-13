@@ -34,3 +34,4 @@ pages:
         - Kubernetesにおけるログの収集: 'documents/kubernetes-basics/logging.md'
     - ローカルクラスターの作成:
         - Vagrant CoreOS Cluster: 'documents/create-local-cluster/vagrant-coreos-cluster.md'
+        - minikube: 'documents/create-local-cluster/minikube.md'
