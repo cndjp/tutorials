@@ -31,5 +31,5 @@ Appendix.
 - [Vagrant CoreOS Cluster](documents/create-local-cluster/vagrant-coreos-cluster.md)
 :   Vagrantのインストールスクリプトを利用してKubernetesクラスターを構成します。 この手順では、ローカルPC上に複数のVirtualBox仮想マシンを立ち上げ、それらの上にKubernetesのマルチノードクラスターを構成します。
 
-- minikube
-:   (Commint Soon)
+- [minikube](documents/create-local-cluster/minikube.md)
+:   hoge
