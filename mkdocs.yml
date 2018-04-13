@@ -16,6 +16,7 @@ markdown_extensions:
     - def_list
     - fontawesome_markdown
     - footnotes
+    - pymdownx.keys
     - toc:
         permalink: true
 extra:
