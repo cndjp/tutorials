@@ -1,0 +1,837 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="クリップボードへコピー">
+      
+        <meta name="lang:clipboard.copied" content="コピーしました">
+      
+        <meta name="lang:search.language" content="en, jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="何も見つかりませんでした">
+      
+        <meta name="lang:search.result.one" content="1件見つかりました">
+      
+        <meta name="lang:search.result.other" content="#件見つかりました">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-　、。，．]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.1">
+    
+    
+      
+        <title>Istioのインストール - Cloud Native Developers JP - ハンズオンチュートリアル</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.78aab2dc.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#istio" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../../.." title="Cloud Native Developers JP - ハンズオンチュートリアル" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">cloud</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Cloud Native Developers JP - ハンズオンチュートリアル
+              </span>
+              <span class="md-header-nav__topic">
+                Istioのインストール
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            検索キーワードを入力してください
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cndjp/tutorials/" title="リポジトリへ" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cndjp/tutorials
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon">cloud</i>
+      
+    </span>
+    Cloud Native Developers JP - ハンズオンチュートリアル
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cndjp/tutorials/" title="リポジトリへ" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cndjp/tutorials
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Kubernetesの基礎
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Kubernetesの基礎
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../kubernetes-basics/play-with-bootcamp-app/" title="最初のアプリケーションを動かしてみる" class="md-nav__link">
+      最初のアプリケーションを動かしてみる
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../kubernetes-basics/logging/" title="Kubernetesにおけるログの収集" class="md-nav__link">
+      Kubernetesにおけるログの収集
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      サービスメッシュ Istio
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        サービスメッシュ Istio
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Istioのインストール
+      </label>
+    
+    <a href="./" title="Istioのインストール" class="md-nav__link md-nav__link--active">
+      Istioのインストール
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目次</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="前提条件" class="md-nav__link">
+    前提条件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-kubernetes" title="1. 準備作業: Kubernetesクラスターの設定を変更する" class="md-nav__link">
+    1. 準備作業: Kubernetesクラスターの設定を変更する
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-vagrant-coreos-clustermaclinux" title="1.1. Vagrant CoreOS Clusterの場合（Mac/Linuxのみ）" class="md-nav__link">
+    1.1. Vagrant CoreOS Clusterの場合（Mac/Linuxのみ）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-minikube" title="1.2. minikubeの場合" class="md-nav__link">
+    1.2. minikubeの場合
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-istio" title="2. Istioのインストール" class="md-nav__link">
+    2. Istioのインストール
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-istioistioctl" title="2.1. Istioのダウンロードとistioctlのセットアップ" class="md-nav__link">
+    2.1. Istioのダウンロードとistioctlのセットアップ
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-istiokubernetes" title="2.2. IstioをKubernetesクラスターにインストールする" class="md-nav__link">
+    2.2. IstioをKubernetesクラスターにインストールする
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      ローカルクラスターの作成
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        ローカルクラスターの作成
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../create-local-cluster/vagrant-coreos-cluster/" title="Vagrant CoreOS Cluster" class="md-nav__link">
+      Vagrant CoreOS Cluster
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../create-local-cluster/minikube/" title="minikube" class="md-nav__link">
+      minikube
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目次</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="前提条件" class="md-nav__link">
+    前提条件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-kubernetes" title="1. 準備作業: Kubernetesクラスターの設定を変更する" class="md-nav__link">
+    1. 準備作業: Kubernetesクラスターの設定を変更する
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-vagrant-coreos-clustermaclinux" title="1.1. Vagrant CoreOS Clusterの場合（Mac/Linuxのみ）" class="md-nav__link">
+    1.1. Vagrant CoreOS Clusterの場合（Mac/Linuxのみ）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-minikube" title="1.2. minikubeの場合" class="md-nav__link">
+    1.2. minikubeの場合
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-istio" title="2. Istioのインストール" class="md-nav__link">
+    2. Istioのインストール
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-istioistioctl" title="2.1. Istioのダウンロードとistioctlのセットアップ" class="md-nav__link">
+    2.1. Istioのダウンロードとistioctlのセットアップ
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-istiokubernetes" title="2.2. IstioをKubernetesクラスターにインストールする" class="md-nav__link">
+    2.2. IstioをKubernetesクラスターにインストールする
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cndjp/tutorials/edit/master/docs/documents/istio/install-istio.md" title="編集" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="istio">Istioのインストール<a class="headerlink" href="#istio" title="Permanent link">&para;</a></h1>
+<p>このチュートリアルでは、Kubernetesクラスターにサービスメッシュ"Istio"をインストールします。</p>
+<h2 id="_1">前提条件<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Kubernetesクラスター 1.7.x+</li>
+<li>上記Kubernetesクラスターに接続可能なkubectl</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>本チュートリアルで、<a href="../../..#appendix">ローカルPCにKubernetesクラスターを構成する手順</a>もご案内していますので、適宜ご利用ください。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Windows PCで、本チュートリアルの<a href="../../create-local-cluster/vagrant-coreos-cluster/">Vagrant CoreOS Cluster</a>を利用している場合、インストールスクリプトの不具合と思われる問題により、このハンズオンを実施することができません。</p>
+<p>該当する場合、<a href="../../create-local-cluster/minikube/">minikube</a>などの代替手段をご利用ください。</p>
+</div>
+<p>以降の手順は、ほとんどの操作をコマンドラインツールから実行します。Mac/Linuxの場合はターミナル、Windowsの場合はWindows PowerShell利用するものとして、手順を記述します。</p>
+<h2 id="1-kubernetes">1. 準備作業: Kubernetesクラスターの設定を変更する<a class="headerlink" href="#1-kubernetes" title="Permanent link">&para;</a></h2>
+<p>まず、KubernetesクラスターにIstioをインストールするために、クラスターの設定を変更します。</p>
+<p>以下は、本チュートリアルの<a href="../../..#appendix">ローカルPCにKubernetesクラスターを構成する手順</a>を利用した場合の方法を記します。
+それ以外の環境を利用する場合については、<a href="https://istio.io/docs/setup/kubernetes/quick-start.html#prerequisites">公式のドキュメントのPrerequisites</a>を参照ください。</p>
+<h3 id="11-vagrant-coreos-clustermaclinux">1.1. <a href="../../create-local-cluster/vagrant-coreos-cluster/">Vagrant CoreOS Cluster</a>の場合（Mac/Linuxのみ）<a class="headerlink" href="#11-vagrant-coreos-clustermaclinux" title="Permanent link">&para;</a></h3>
+<p>クラスターが起動中であれば、始めに停止します。</p>
+<p>Vagrant CoreOS Clusterのインストールスクリプトを<code>clone</code>してできたディレクトリを、カレントディレクトリにします。以下、ユーザーホームディレクトリで<code>clone</code>している場合のコマンド例です。</p>
+<div class="codehilite"><pre><span></span>cd ~/kubernetes-vagrant-coreos-cluster
+</pre></div>
+
+
+<p>以下のコマンドで、クラスターを停止します。</p>
+<div class="codehilite"><pre><span></span>vagrant halt
+</pre></div>
+
+
+<p>クラスターの停止が完了したら、AUTHORIZATION_MODE=RBACオプションを指定して、RBACを有効にします。</p>
+<div class="codehilite"><pre><span></span>AUTHORIZATION_MODE=RBAC vagrant up
+</pre></div>
+
+
+<p>通常どおりクラスターが起動するのを待ってから、<a href="#2-istio">2. Istioのインストール</a>に進んでください。</p>
+<h3 id="12-minikube">1.2. <a href="../../create-local-cluster/minikube/">minikube</a>の場合<a class="headerlink" href="#12-minikube" title="Permanent link">&para;</a></h3>
+<p>クラスターが起動中であれば、始めに停止します。minikubeクラスターを停止するには、以下のコマンドを実行します。</p>
+<div class="codehilite"><pre><span></span>minikube stop
+</pre></div>
+
+
+<p>クラスターの停止後、以下のようにオプションを追加してクラスターを起動します。</p>
+<p><i class="fa fa-apple"></i> <strong>Mac</strong> / <i class="fa fa-linux"></i> <strong>Linux</strong></p>
+<div class="codehilite"><pre><span></span>minikube start \
+    --extra-config=controller-manager.ClusterSigningCertFile=&quot;/var/lib/localkube/certs/ca.crt&quot; \
+    --extra-config=controller-manager.ClusterSigningKeyFile=&quot;/var/lib/localkube/certs/ca.key&quot; \
+    --extra-config=apiserver.Admission.PluginNames=NamespaceLifecycle,LimitRanger,ServiceAccount,PersistentVolumeLabel,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota \
+    --extra-config=apiserver.Authorization.Mode=RBAC \
+    --bootstrapper=localkube \
+    --kubernetes-version=v1.9.0
+</pre></div>
+
+
+<p><i class="fa fa-windows"></i> <strong>Windows</strong></p>
+<div class="codehilite"><pre><span></span>minikube start `
+    --extra-config=controller-manager.ClusterSigningCertFile=&quot;/var/lib/localkube/certs/ca.crt&quot; `
+    --extra-config=controller-manager.ClusterSigningKeyFile=&quot;/var/lib/localkube/certs/ca.key&quot; `
+    --extra-config=apiserver.Admission.PluginNames=NamespaceLifecycle,LimitRanger,ServiceAccount,PersistentVolumeLabel,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota `
+    --extra-config=apiserver.Authorization.Mode=RBAC `
+    --bootstrapper=localkube `
+    --kubernetes-version=v1.9.0
+</pre></div>
+
+
+<p>通常どおりクラスターが起動するのを待ってから、<a href="#2-istio">2. Istioのインストール</a>に進んでください。</p>
+<h2 id="2-istio">2. Istioのインストール<a class="headerlink" href="#2-istio" title="Permanent link">&para;</a></h2>
+<p>ここでは、KubernetesにIstioをインストールします。</p>
+<h3 id="21-istioistioctl">2.1. Istioのダウンロードとistioctlのセットアップ<a class="headerlink" href="#21-istioistioctl" title="Permanent link">&para;</a></h3>
+<p>Isitoは、Kubernetesにデプロイするためのmanifestやコマンドラインツール(istioctl)、サンプルアプリ等の一式をzipアーカイブにまとめたものとして配布されています。
+このチュートリアルの作成時点(2018/04/20)では、0.7.1が最新バージョンです。</p>
+<p>それでは、Istioをダウンロードします。Mac/Linuxの場合は、最新バージョンを取得とアーカイブの展開を自動的に実行してくれるスクリプトツールを利用することができます。</p>
+<p><i class="fa fa-apple"></i> <strong>Mac</strong> / <i class="fa fa-linux"></i> <strong>Linux</strong></p>
+<div class="codehilite"><pre><span></span>curl -L https://git.io/getLatestIstio | sh -
+</pre></div>
+
+
+<p>Windowsの場合は、zipアーカイブのダウンロードや展開などの処理を個別のコマンドとして実行します。</p>
+<p><i class="fa fa-windows"></i> <strong>Windows</strong></p>
+<div class="codehilite"><pre><span></span>[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
+Invoke-WebRequest -Uri https://github.com/istio/istio/releases/download/0.7.1/istio-0.7.1-win.zip -OutFile istio_0.7.1_win.zip; `
+Expand-Archive -Path .\istio_0.7.1_win.zip; `
+mv .\istio_0.7.1_win\istio-0.7.1\ .\; rmdir .\istio_0.7.1_win; rm .\istio_0.7.1_win.zip
+</pre></div>
+
+
+<p>Istioのコマンドラインツール(istioctl)は、ダウンロードしてできたディレクトリ配下の<code>istio-0.7.1/bin</code>に配置されています。各プラットフォームに合わせて、istioctlをPATHに追加してください。</p>
+<p><i class="fa fa-apple"></i> <strong>Mac</strong> / <i class="fa fa-linux"></i> <strong>Linux</strong></p>
+<div class="codehilite"><pre><span></span>export PATH=$PATH:$PWD/istio-0.7.1/bin
+</pre></div>
+
+
+<p><i class="fa fa-windows"></i> <strong>Windows</strong></p>
+<div class="codehilite"><pre><span></span><span class="nt">Set-Item</span> <span class="nt">Env</span><span class="p">:</span><span class="nd">Path</span> <span class="s2">&quot;$Env:Path;$(Convert-Path .)\istio-0.7.1\bin&quot;</span>
+</pre></div>
+
+
+<p>istioctlが使えることを確認するには、<code>istioctl version</code>を実行してistioctlのバージョン情報を表示します。</p>
+<div class="codehilite"><pre><span></span>istioctl version
+</pre></div>
+
+
+<p>以下のような結果となることを確認してください。</p>
+<div class="codehilite"><pre><span></span><span class="n">Version</span><span class="o">:</span> <span class="mf">0.7</span><span class="o">.</span><span class="mi">1</span>
+<span class="n">GitRevision</span><span class="o">:</span> <span class="mi">62110</span><span class="n">d4f0373a7613e57b8a4d559ded9cb6a1cc8</span>
+<span class="n">User</span><span class="o">:</span> <span class="n">root</span><span class="err">@</span><span class="n">c5207293dc14</span>
+<span class="n">Hub</span><span class="o">:</span> <span class="n">docker</span><span class="o">.</span><span class="na">io</span><span class="o">/</span><span class="n">istio</span>
+<span class="n">GolangVersion</span><span class="o">:</span> <span class="n">go1</span><span class="o">.</span><span class="mi">9</span>
+<span class="n">BuildStatus</span><span class="o">:</span> <span class="n">Clean</span>
+</pre></div>
+
+
+<p>これで、Istioのダウンロードとistioctlのセットアップは完了です。</p>
+<h3 id="22-istiokubernetes">2.2. IstioをKubernetesクラスターにインストールする<a class="headerlink" href="#22-istiokubernetes" title="Permanent link">&para;</a></h3>
+<p>IstioをKubernetesクラスターにインストールします。必要なものは全てKubernetesのmanifestファイルとして記述されているので、これをデプロイするだけでインストールが完了します。</p>
+<div class="codehilite"><pre><span></span>kubectl apply -f ./istio-0.7.1/install/kubernetes/istio.yaml
+</pre></div>
+
+
+<p>istio-systemというNamespace配下に必要な構成要素が配備されます。ServiceとPodにどのようなオブジェクトが配備されるか、確認してみます。</p>
+<p>まず、Serviceオブジェクトです。</p>
+<div class="codehilite"><pre><span></span>kubectl get services -n istio-system
+</pre></div>
+
+
+<p>結果は以下のようになります。</p>
+<div class="codehilite"><pre><span></span>NAME            TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                                                            AGE
+istio-ingress   LoadBalancer   10.100.151.26    &lt;pending&gt;     80:31826/TCP,443:31716/TCP                                         1m
+istio-mixer     ClusterIP      10.100.149.13    &lt;none&gt;        9091/TCP,15004/TCP,9093/TCP,9094/TCP,9102/TCP,9125/UDP,42422/TCP   1m
+istio-pilot     ClusterIP      10.100.118.141   &lt;none&gt;        15003/TCP,8080/TCP,9093/TCP,443/TCP                                1m
+</pre></div>
+
+
+<p>次にPodです。</p>
+<div class="codehilite"><pre><span></span>kubectl get pods -n istio-system
+</pre></div>
+
+
+<p>結果は以下のようになります。</p>
+<div class="codehilite"><pre><span></span>NAME                             READY     STATUS    RESTARTS   AGE
+istio-ca-418645489-gg8sh         1/1       Running   0          2m
+istio-ingress-1688831668-t24gh   1/1       Running   0          2m
+istio-mixer-3303323913-s8c2l     3/3       Running   0          2m
+istio-pilot-3625647026-0rv6z     2/2       Running   0          2m
+</pre></div>
+
+
+<p>READYの列は起動が確認されたPod内のContainerの数を表します。上のように全てのContainerがREADYになればインストール完了です（およそ1-2分ほどかかります）。</p>
+<hr />
+<p>以上で、KubernetesへのIstioのインストールは完了です。</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../kubernetes-basics/logging/" title="Kubernetesにおけるログの収集" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前
+                </span>
+                Kubernetesにおけるログの収集
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../create-local-cluster/vagrant-coreos-cluster/" title="Vagrant CoreOS Cluster" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  次
+                </span>
+                Vagrant CoreOS Cluster
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+      <a href="https://github.com/cndjp" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.8eb9be28.js"></script>
+      
+        
+        
+          
+          <script src="../../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+          
+            
+              
+                <script src="../../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+            <script src="../../../assets/javascripts/lunr/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"0.17.3",url:{base:"../../.."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>

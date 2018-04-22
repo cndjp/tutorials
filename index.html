@@ -288,6 +288,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#istio" title="サービスメッシュ Istio" class="md-nav__link">
+    サービスメッシュ Istio
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -382,10 +389,46 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
     
     <label class="md-nav__link" for="nav-3">
-      ローカルクラスターの作成
+      サービスメッシュ Istio
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-3">
+        サービスメッシュ Istio
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="documents/istio/install-istio/" title="Istioのインストール" class="md-nav__link">
+      Istioのインストール
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      ローカルクラスターの作成
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
         ローカルクラスターの作成
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -462,6 +505,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#istio" title="サービスメッシュ Istio" class="md-nav__link">
+    サービスメッシュ Istio
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -510,21 +560,36 @@
 <p>これは<a href="https://cnd.connpass.com/">Cloud Native Developers JP 勉強会</a>のハンズオンチュートリアルです。</p>
 <p>Kubernetesを中心としたCloud NativeなOSSを、手を動かしながら学べるコンテンツを提供します。勉強会に参加された方もそうでない方も、ご自由に活用ください。</p>
 <h2 id="_1">チュートリアルの始め方<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p><a href="#contents">Contents</a>にあるどの項目からでも始められます。お好きなものをクリックして開始してください。</p>
-<p>（必要な環境要件については、各チュートリアルの冒頭の指示に従ってください）</p>
+<p><a href="#contents">Contents</a>にあるどの項目からでも始められます。お好きなものをクリックして開始してください。
+必要な環境要件は、各チュートリアルの冒頭に記載してあります。</p>
 <h2 id="contents">Contents<a class="headerlink" href="#contents" title="Permanent link">&para;</a></h2>
 <h4 id="kubernetes">Kubernetesの基礎<a class="headerlink" href="#kubernetes" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <dl>
-<dt><a href="documents/kubernetes-basics/play-with-bootcamp-app/">最初のアプリケーションを動かしてみる</a></dt>
+<dt><a href="documents/kubernetes-basics/play-with-bootcamp-app/">最初のアプリケーションを動かしてみる</a> <i class="fa fa-external-link"></i></dt>
 <dd>簡単なサンプルアプリケーションを使って、Kubernetes上へのコンテナのデプロイ、スケールアウト、スケールイン等のオペレーションを体験します。</dd>
 </dl>
 </li>
 <li>
 <dl>
-<dt><a href="documents/kubernetes-basics/logging/">Kubernetesにおけるログの収集</a></dt>
+<dt><a href="documents/kubernetes-basics/logging/">Kubernetesにおけるログの収集</a> <i class="fa fa-external-link"></i></dt>
 <dd>Kubernetesクラスター上で動作するコンテナのログを、確認、収集する手順を体験します。</dd>
+</dl>
+</li>
+</ul>
+<h4 id="istio">サービスメッシュ Istio<a class="headerlink" href="#istio" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<dl>
+<dt><a href="documents/istio/install-istio/">Istioのインストール</a> <i class="fa fa-external-link"></i></dt>
+<dd>Istioのインストール</dd>
+</dl>
+</li>
+<li>
+<dl>
+<dt>リクエスト・ルーティングの制御(Comming Soon...)</dt>
+<dd>Istioを使ってリクエストのルーティング先の制御を体験します。カナリーデプロイメントのシナリオを想定して、複数バージョンが混在するアプリケーションのコンテナ群に対して、バージョン毎に流量を変えてルーティングしてみます。</dd>
 </dl>
 </li>
 </ul>
@@ -533,13 +598,13 @@
 <ul>
 <li>
 <dl>
-<dt><a href="documents/create-local-cluster/vagrant-coreos-cluster/">Vagrant CoreOS Cluster</a></dt>
+<dt><a href="documents/create-local-cluster/vagrant-coreos-cluster/">Vagrant CoreOS Cluster</a> <i class="fa fa-external-link"></i></dt>
 <dd>Vagrantのインストールスクリプトを利用してKubernetesクラスターを構成します。 この手順では、ローカルPC上に複数のVirtualBox仮想マシンを立ち上げ、それらの上にKubernetesのマルチノードクラスターを構成します。</dd>
 </dl>
 </li>
 <li>
 <dl>
-<dt><a href="documents/create-local-cluster/minikube/">minikube</a></dt>
+<dt><a href="documents/create-local-cluster/minikube/">minikube</a> <i class="fa fa-external-link"></i></dt>
 <dd>minikubeを利用してKubernetesクラスターを構成します。ローカルPCに立ち上げた仮想マシン上に、Kubernetesのシングルノードクラスターを構成することができます。Vagrant CoreOS Clusterに比べて簡単な手順でクラスターを構成できます。</dd>
 </dl>
 </li>
