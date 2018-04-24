@@ -419,6 +419,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../configuring-request-routing/" title="リクエスト・ルーティングの制御" class="md-nav__link">
+      リクエスト・ルーティングの制御
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -618,25 +630,7 @@
 
 
 <p>クラスターの停止後、以下のようにオプションを追加してクラスターを起動します。</p>
-<p><i class="fa fa-apple"></i> <strong>Mac</strong> / <i class="fa fa-linux"></i> <strong>Linux</strong></p>
-<div class="codehilite"><pre><span></span>minikube start \
-    --extra-config=controller-manager.ClusterSigningCertFile=&quot;/var/lib/localkube/certs/ca.crt&quot; \
-    --extra-config=controller-manager.ClusterSigningKeyFile=&quot;/var/lib/localkube/certs/ca.key&quot; \
-    --extra-config=apiserver.Admission.PluginNames=NamespaceLifecycle,LimitRanger,ServiceAccount,PersistentVolumeLabel,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota \
-    --extra-config=apiserver.Authorization.Mode=RBAC \
-    --bootstrapper=localkube \
-    --kubernetes-version=v1.9.0
-</pre></div>
-
-
-<p><i class="fa fa-windows"></i> <strong>Windows</strong></p>
-<div class="codehilite"><pre><span></span>minikube start `
-    --extra-config=controller-manager.ClusterSigningCertFile=&quot;/var/lib/localkube/certs/ca.crt&quot; `
-    --extra-config=controller-manager.ClusterSigningKeyFile=&quot;/var/lib/localkube/certs/ca.key&quot; `
-    --extra-config=apiserver.Admission.PluginNames=NamespaceLifecycle,LimitRanger,ServiceAccount,PersistentVolumeLabel,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota `
-    --extra-config=apiserver.Authorization.Mode=RBAC `
-    --bootstrapper=localkube `
-    --kubernetes-version=v1.9.0
+<div class="codehilite"><pre><span></span>minikube start --bootstrapper=localkube --kubernetes-version=v1.9.0
 </pre></div>
 
 
@@ -760,13 +754,13 @@ istio-pilot-3625647026-0rv6z     2/2       Running   0          2m
           </a>
         
         
-          <a href="../../create-local-cluster/vagrant-coreos-cluster/" title="Vagrant CoreOS Cluster" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../configuring-request-routing/" title="リクエスト・ルーティングの制御" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   次
                 </span>
-                Vagrant CoreOS Cluster
+                リクエスト・ルーティングの制御
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
