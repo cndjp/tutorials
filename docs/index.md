@@ -25,10 +25,10 @@ Contents
 #### サービスメッシュ Istio
 
 - [Istioのインストール](documents/istio/install-istio.md) :fa-external-link:
-:   Istioのインストール
+:   Kubernetesクラスターにサービスメッシュ"Istio"をインストールします。
 
-- リクエスト・ルーティングの制御(Comming Soon...)
-:   Istioを使ってリクエストのルーティング先の制御を体験します。カナリーデプロイメントのシナリオを想定して、複数バージョンが混在するアプリケーションのコンテナ群に対して、バージョン毎に流量を変えてルーティングしてみます。
+- [リクエスト・ルーティングの制御](documents/istio/configuring-request-routing.md) :fa-external-link:
+:   Istioを使ってリクエスト・ルーティングの制御を体験します。カナリーデプロイメントのシナリオを想定して、複数バージョンが混在するアプリケーションのコンテナ群に対して、バージョン毎に流量を変えてルーティングしてみます。
 
 Appendix.
 ---------

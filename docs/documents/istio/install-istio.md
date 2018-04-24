@@ -51,25 +51,7 @@ Vagrant CoreOS Clusterのインストールスクリプトを``clone``してで�
 
 クラスターの停止後、以下のようにオプションを追加してクラスターを起動します。
 
-:fa-apple: __Mac__ / :fa-linux: __Linux__
-
-    minikube start \
-        --extra-config=controller-manager.ClusterSigningCertFile="/var/lib/localkube/certs/ca.crt" \
-        --extra-config=controller-manager.ClusterSigningKeyFile="/var/lib/localkube/certs/ca.key" \
-        --extra-config=apiserver.Admission.PluginNames=NamespaceLifecycle,LimitRanger,ServiceAccount,PersistentVolumeLabel,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota \
-        --extra-config=apiserver.Authorization.Mode=RBAC \
-        --bootstrapper=localkube \
-        --kubernetes-version=v1.9.0
-
-:fa-windows: __Windows__
-
-    minikube start `
-        --extra-config=controller-manager.ClusterSigningCertFile="/var/lib/localkube/certs/ca.crt" `
-        --extra-config=controller-manager.ClusterSigningKeyFile="/var/lib/localkube/certs/ca.key" `
-        --extra-config=apiserver.Admission.PluginNames=NamespaceLifecycle,LimitRanger,ServiceAccount,PersistentVolumeLabel,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota `
-        --extra-config=apiserver.Authorization.Mode=RBAC `
-        --bootstrapper=localkube `
-        --kubernetes-version=v1.9.0
+    minikube start --bootstrapper=localkube --kubernetes-version=v1.9.0
 
 通常どおりクラスターが起動するのを待ってから、[2. Istioのインストール](#2-istio)に進んでください。
 
