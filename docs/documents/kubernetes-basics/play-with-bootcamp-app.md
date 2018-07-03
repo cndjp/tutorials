@@ -19,7 +19,16 @@
 -----------------------------------------------
 ここでは、簡単なサンプルアプリケーション(bootcamp)をデプロイして、クラスターの動作確認をします。
 
-### 1.1. bootcampのデプロイ
+### 1.1. Namespaceを作成する
+以降のチュートリアルの手順で利用するNamespaceとして、"bootcamp"を作成しておきます。
+
+    kubectl create namespace bootcamp
+
+デフォルトNamespaceを"bootcamp"に変更しておくことで、kubectlの実行の度にNamespaceを指定しなくても良いようにしておきます。
+
+    kubectl config set-context $(kubectl config current-context) --namespace=bootcamp
+
+### 1.2. bootcampのデプロイ
 Kubernetesクラスターにサンプルアプリケーションをデプロイしてみます。以下のコマンドを実行します。
 
 ```sh
@@ -39,7 +48,7 @@ __Deploymentの詳細情報の取得__
 !!!Note
     このアプリケーションは、[Kubernetesの公式のインタラクティブ・チュートリアル](https://kubernetesbootcamp.github.io/kubernetes-bootcamp/)で利用しているものと同じものです。
 
-### 1.2. bootcampへのアクセス
+### 1.3. bootcampへのアクセス
 アプリケーションにクラスターの外からアクセスするために、ここではkubectlの機能を使ってクラスター内に通じるプロキシを構成します。以下のコマンドを実行すると、localhostの8001ポートからクラスター内にアクセスできるようになります。
 
     kubectl proxy
@@ -83,7 +92,7 @@ export POD_NAME=$(kubectl get pods -o go-template \
     --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')
 ```
 ```sh
-curl http://localhost:8001/api/v1/proxy/namespaces/default/pods/$POD_NAME/
+curl http://localhost:8001/api/v1/proxy/namespaces/bootcamp/pods/$POD_NAME/
 ```
 
 :fa-windows: __Windows__
@@ -93,7 +102,7 @@ $POD_NAME=kubectl get pods -o go-template `
     --template '{{range .items}}{{.metadata.name}}{{\"\n\"}}{{end}}'
 ```
 ```bat
-Invoke-RestMethod -Uri "http://localhost:8001/api/v1/proxy/namespaces/default/pods/$POD_NAME/"
+Invoke-RestMethod -Uri "http://localhost:8001/api/v1/proxy/namespaces/bootcamp/pods/$POD_NAME/"
 ```
 
 正しく動作していれば、以下のようなレスポンスが返却されます。
@@ -316,6 +325,14 @@ sternは複数のPodからの標準出力を自動的に色分けして表示し
 
 同じようにリクエストを送信して、応答を返すPodの数が減っていることを確認してみてください。
 
+
+4. クリーンアップ
+-----------------
+これまで作ってきたオブジェクトをクリーンアップしたい場合は、以下のコマンドを実行して、Namespaceごとオブジェクトを削除してください。
+
+```
+kubectl delete namespace bootcamp
+```
 
 ---
 以上で本チュートリアルは終了です。
