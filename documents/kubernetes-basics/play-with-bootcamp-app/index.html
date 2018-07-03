@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-　、。，．]+">
       
       <link rel="shortcut icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.1">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
     
     
       
@@ -40,7 +40,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/application.78aab2dc.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.8d40d89b.css">
       
         <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.6079476c.css">
       
@@ -315,15 +315,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-bootcamp" title="1.1. bootcampのデプロイ" class="md-nav__link">
-    1.1. bootcampのデプロイ
+  <a href="#11-namespace" title="1.1. Namespaceを作成する" class="md-nav__link">
+    1.1. Namespaceを作成する
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-bootcamp" title="1.2. bootcampへのアクセス" class="md-nav__link">
-    1.2. bootcampへのアクセス
+  <a href="#12-bootcamp" title="1.2. bootcampのデプロイ" class="md-nav__link">
+    1.2. bootcampのデプロイ
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-bootcamp" title="1.3. bootcampへのアクセス" class="md-nav__link">
+    1.3. bootcampへのアクセス
   </a>
   
 </li>
@@ -425,6 +432,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4_1" title="4. クリーンアップ" class="md-nav__link">
+    4. クリーンアップ
+  </a>
   
 </li>
       
@@ -588,15 +602,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-bootcamp" title="1.1. bootcampのデプロイ" class="md-nav__link">
-    1.1. bootcampのデプロイ
+  <a href="#11-namespace" title="1.1. Namespaceを作成する" class="md-nav__link">
+    1.1. Namespaceを作成する
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-bootcamp" title="1.2. bootcampへのアクセス" class="md-nav__link">
-    1.2. bootcampへのアクセス
+  <a href="#12-bootcamp" title="1.2. bootcampのデプロイ" class="md-nav__link">
+    1.2. bootcampのデプロイ
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-bootcamp" title="1.3. bootcampへのアクセス" class="md-nav__link">
+    1.3. bootcampへのアクセス
   </a>
   
 </li>
@@ -701,6 +722,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#4_1" title="4. クリーンアップ" class="md-nav__link">
+    4. クリーンアップ
+  </a>
+  
+</li>
+      
       
       
       
@@ -737,7 +765,18 @@
 </div>
 <h2 id="1">1. サンプルアプリケーションのデプロイと動作確認<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <p>ここでは、簡単なサンプルアプリケーション(bootcamp)をデプロイして、クラスターの動作確認をします。</p>
-<h3 id="11-bootcamp">1.1. bootcampのデプロイ<a class="headerlink" href="#11-bootcamp" title="Permanent link">&para;</a></h3>
+<h3 id="11-namespace">1.1. Namespaceを作成する<a class="headerlink" href="#11-namespace" title="Permanent link">&para;</a></h3>
+<p>以降のチュートリアルの手順で利用するNamespaceとして、"bootcamp"を作成しておきます。</p>
+<div class="codehilite"><pre><span></span>kubectl create namespace bootcamp
+</pre></div>
+
+
+<p>デフォルトNamespaceを"bootcamp"に変更しておくことで、kubectlの実行の度にNamespaceを指定しなくても良いようにしておきます。</p>
+<div class="codehilite"><pre><span></span>kubectl config set-context $(kubectl config current-context) --namespace=bootcamp
+</pre></div>
+
+
+<h3 id="12-bootcamp">1.2. bootcampのデプロイ<a class="headerlink" href="#12-bootcamp" title="Permanent link">&para;</a></h3>
 <p>Kubernetesクラスターにサンプルアプリケーションをデプロイしてみます。以下のコマンドを実行します。</p>
 <div class="codehilite"><pre><span></span>kubectl run kubernetes-bootcamp --image<span class="o">=</span>docker.io/jocatalin/kubernetes-bootcamp:v1 --port<span class="o">=</span><span class="m">8080</span>
 </pre></div>
@@ -758,7 +797,7 @@
 <p class="admonition-title">Note</p>
 <p>このアプリケーションは、<a href="https://kubernetesbootcamp.github.io/kubernetes-bootcamp/">Kubernetesの公式のインタラクティブ・チュートリアル</a>で利用しているものと同じものです。</p>
 </div>
-<h3 id="12-bootcamp">1.2. bootcampへのアクセス<a class="headerlink" href="#12-bootcamp" title="Permanent link">&para;</a></h3>
+<h3 id="13-bootcamp">1.3. bootcampへのアクセス<a class="headerlink" href="#13-bootcamp" title="Permanent link">&para;</a></h3>
 <p>アプリケーションにクラスターの外からアクセスするために、ここではkubectlの機能を使ってクラスター内に通じるプロキシを構成します。以下のコマンドを実行すると、localhostの8001ポートからクラスター内にアクセスできるようになります。</p>
 <div class="codehilite"><pre><span></span>kubectl proxy
 </pre></div>
@@ -797,7 +836,7 @@
 </pre></div>
 
 
-<div class="codehilite"><pre><span></span>curl http://localhost:8001/api/v1/proxy/namespaces/default/pods/<span class="nv">$POD_NAME</span>/
+<div class="codehilite"><pre><span></span>curl http://localhost:8001/api/v1/proxy/namespaces/bootcamp/pods/<span class="nv">$POD_NAME</span>/
 </pre></div>
 
 
@@ -807,7 +846,7 @@
 </pre></div>
 
 
-<div class="codehilite"><pre><span></span>Invoke-RestMethod -Uri <span class="s2">&quot;http://localhost:8001/api/v1/proxy/namespaces/default/pods/$POD_NAME/&quot;</span>
+<div class="codehilite"><pre><span></span>Invoke-RestMethod -Uri <span class="s2">&quot;http://localhost:8001/api/v1/proxy/namespaces/bootcamp/pods/$POD_NAME/&quot;</span>
 </pre></div>
 
 
@@ -1013,15 +1052,23 @@ kubernetes-bootcamp-2457653786-kvqdj kubernetes-bootcamp
 <p>sternは複数のPodからの標準出力を自動的に色分けして表示します。実際に各Podからの出力が色で識別できることを確認してください。</p>
 <p>続いて、Serviceに対して何度かリクエストを送信してみます。このとき、複数のPodから応答が返ってきていることを確認できます。</p>
 <p><i class="fa fa-apple"></i> <strong>Mac</strong> / <i class="fa fa-linux"></i> <strong>Linux</strong></p>
-<div class="codehilite"><pre><span></span>curl http://<span class="cp">${</span><span class="n">NODE01</span><span class="cp">}</span>:<span class="cp">${</span><span class="n">NODE_PORT</span><span class="cp">}</span>/
+<div class="codehilite"><pre><span></span>curl http://<span class="cp">${</span><span class="n">NODE_IP_0</span><span class="cp">}</span>:<span class="cp">${</span><span class="n">NODE_PORT</span><span class="cp">}</span>/
 </pre></div>
 
 
 <p><i class="fa fa-windows"></i> <strong>Windows</strong></p>
-<div class="codehilite"><pre><span></span>Invoke-RestMethod -Uri &quot;http://<span class="cp">${</span><span class="n">NODE01</span><span class="cp">}</span>:<span class="cp">${</span><span class="n">NODE_PORT</span><span class="cp">}</span>/&quot;
+<div class="codehilite"><pre><span></span>Invoke-RestMethod -Uri &quot;http://<span class="cp">${</span><span class="n">NODE_IP_0</span><span class="cp">}</span>:<span class="cp">${</span><span class="n">NODE_PORT</span><span class="cp">}</span>/&quot;
 </pre></div>
 
 
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>複数のPodにどのようにリクエストが配分されるかは、環境によって異なります。上記の手順を実施してもリクエストが分散しない場合は、今リクエストが送られているPodを削除して、他のPodにルーティング先が切り替わることを確認してみましょう。</p>
+<p><code>kubectl delete pod [現在リクエストが送られているPodの名前]</code></p>
+<p>Kubernetsの自動回復の機能によって、削除された分のPodが新たに起動します。以下のコマンドで、Pod数が回復していることを確認してください。</p>
+<p><code>kubectl get pod</code></p>
+<p>再度リクエストを送信すると、先程までとは異なるPodにルーティング先が切り替わっていることが確認できます。</p>
+</div>
 <h3 id="43">4.3. スケールイン<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
 <p>同様にしてPodを縮小することも可能です。以下のコマンドではレプリカを2つに縮小します。</p>
 <div class="codehilite"><pre><span></span>kubectl scale deployments/kubernetes-bootcamp --replicas=2
@@ -1029,6 +1076,12 @@ kubernetes-bootcamp-2457653786-kvqdj kubernetes-bootcamp
 
 
 <p>同じようにリクエストを送信して、応答を返すPodの数が減っていることを確認してみてください。</p>
+<h2 id="4_1">4. クリーンアップ<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h2>
+<p>これまで作ってきたオブジェクトをクリーンアップしたい場合は、以下のコマンドを実行して、Namespaceごとオブジェクトを削除してください。</p>
+<div class="codehilite"><pre><span></span>kubectl delete namespace bootcamp
+</pre></div>
+
+
 <hr />
 <p>以上で本チュートリアルは終了です。</p>
                 
@@ -1110,7 +1163,7 @@ kubernetes-bootcamp-2457653786-kvqdj kubernetes-bootcamp
       
     </div>
     
-      <script src="../../../assets/javascripts/application.8eb9be28.js"></script>
+      <script src="../../../assets/javascripts/application.b438e6c5.js"></script>
       
         
         
