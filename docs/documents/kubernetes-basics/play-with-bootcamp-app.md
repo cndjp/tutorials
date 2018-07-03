@@ -311,11 +311,11 @@ sternは複数のPodからの標準出力を自動的に色分けして表示し
 
 :fa-apple: __Mac__ / :fa-linux: __Linux__
 
-    curl http://${NODE01}:${NODE_PORT}/
+    curl http://${NODE_IP_0}:${NODE_PORT}/
 
 :fa-windows: __Windows__
 
-    Invoke-RestMethod -Uri "http://${NODE01}:${NODE_PORT}/"
+    Invoke-RestMethod -Uri "http://${NODE_IP_0}:${NODE_PORT}/"
 
 
 ### 4.3. スケールイン
