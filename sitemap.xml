@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-07-03</lastmod>
+     <lastmod>2018-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -13,13 +13,19 @@
         
     <url>
      <loc>/documents/kubernetes-basics/play-with-bootcamp-app/</loc>
-     <lastmod>2018-07-03</lastmod>
+     <lastmod>2018-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/documents/kubernetes-basics/logging/</loc>
-     <lastmod>2018-07-03</lastmod>
+     <lastmod>2018-07-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/documents/kubernetes-basics/deploy-3tier-app/</loc>
+     <lastmod>2018-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -29,13 +35,13 @@
         
     <url>
      <loc>/documents/istio/install-istio/</loc>
-     <lastmod>2018-07-03</lastmod>
+     <lastmod>2018-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/documents/istio/configuring-request-routing/</loc>
-     <lastmod>2018-07-03</lastmod>
+     <lastmod>2018-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -45,13 +51,13 @@
         
     <url>
      <loc>/documents/create-local-cluster/vagrant-coreos-cluster/</loc>
-     <lastmod>2018-07-03</lastmod>
+     <lastmod>2018-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/documents/create-local-cluster/minikube/</loc>
-     <lastmod>2018-07-03</lastmod>
+     <lastmod>2018-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
         

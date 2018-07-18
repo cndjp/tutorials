@@ -1,0 +1,1298 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="クリップボードへコピー">
+      
+        <meta name="lang:clipboard.copied" content="コピーしました">
+      
+        <meta name="lang:search.language" content="en, jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="何も見つかりませんでした">
+      
+        <meta name="lang:search.result.one" content="1件見つかりました">
+      
+        <meta name="lang:search.result.other" content="#件見つかりました">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-　、。，．]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>Web-AP-DBの3層アプリケーションが動くまで - Cloud Native Developers JP - ハンズオンチュートリアル</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../../.." title="Cloud Native Developers JP - ハンズオンチュートリアル" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">cloud</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Cloud Native Developers JP - ハンズオンチュートリアル
+              </span>
+              <span class="md-header-nav__topic">
+                Web-AP-DBの3層アプリケーションが動くまで
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            検索キーワードを入力してください
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cndjp/tutorials/" title="リポジトリへ" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cndjp/tutorials
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon">cloud</i>
+      
+    </span>
+    Cloud Native Developers JP - ハンズオンチュートリアル
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cndjp/tutorials/" title="リポジトリへ" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cndjp/tutorials
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Kubernetesの基礎
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Kubernetesの基礎
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../play-with-bootcamp-app/" title="最初のアプリケーションを動かしてみる" class="md-nav__link">
+      最初のアプリケーションを動かしてみる
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../logging/" title="Kubernetesにおけるログの収集" class="md-nav__link">
+      Kubernetesにおけるログの収集
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Web-AP-DBの3層アプリケーションが動くまで
+      </label>
+    
+    <a href="./" title="Web-AP-DBの3層アプリケーションが動くまで" class="md-nav__link md-nav__link--active">
+      Web-AP-DBの3層アプリケーションが動くまで
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">目次</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="前提条件" class="md-nav__link">
+    前提条件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0" title="0 . 準備作業" class="md-nav__link">
+    0 . 準備作業
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-namespace" title="0.1. Namespaceを作成する" class="md-nav__link">
+    0.1. Namespaceを作成する
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-mysql" title="1 . MySQLデータベースを動かす" class="md-nav__link">
+    1 . MySQLデータベースを動かす
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-1-mysqldocker" title="1-1. MySQLのDockerイメージの準備" class="md-nav__link">
+    1-1. MySQLのDockerイメージの準備
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-2-dbpersistentvolume" title="1-2. DB用のPersistentVolumeの作成" class="md-nav__link">
+    1-2. DB用のPersistentVolumeの作成
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-3-secret" title="1-3. データベースユーザーのSecretの作成" class="md-nav__link">
+    1-3. データベースユーザーのSecretの作成
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-4" title="1-4. データベースのコンテナの起動" class="md-nav__link">
+    1-4. データベースのコンテナの起動
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" title="2 . アプリケーションを動かす" class="md-nav__link">
+    2 . アプリケーションを動かす
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-1-nodejsdocker" title="2-1. Node.jsアプリケーションのDockerイメージの準備" class="md-nav__link">
+    2-1. Node.jsアプリケーションのDockerイメージの準備
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2" title="2-2. アプリケーションのコンテナのデプロイ" class="md-nav__link">
+    2-2. アプリケーションのコンテナのデプロイ
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-ingress" title="3 . Ingressを使ったロードバランサーの構成" class="md-nav__link">
+    3 . Ingressを使ったロードバランサーの構成
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3-1-ingressnginx-ingress-controller" title="3-1. IngressとNGINX Ingress Controllerのデプロイ" class="md-nav__link">
+    3-1. IngressとNGINX Ingress Controllerのデプロイ
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2" title="3-2. アプリケーションへのアクセス" class="md-nav__link">
+    3-2. アプリケーションへのアクセス
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      サービスメッシュ Istio
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        サービスメッシュ Istio
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../istio/install-istio/" title="Istioのインストール" class="md-nav__link">
+      Istioのインストール
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../istio/configuring-request-routing/" title="リクエスト・ルーティングの制御" class="md-nav__link">
+      リクエスト・ルーティングの制御
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      ローカルクラスターの作成
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        ローカルクラスターの作成
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../create-local-cluster/vagrant-coreos-cluster/" title="Vagrant CoreOS Cluster" class="md-nav__link">
+      Vagrant CoreOS Cluster
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../create-local-cluster/minikube/" title="minikube" class="md-nav__link">
+      minikube
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">目次</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="前提条件" class="md-nav__link">
+    前提条件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0" title="0 . 準備作業" class="md-nav__link">
+    0 . 準備作業
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-namespace" title="0.1. Namespaceを作成する" class="md-nav__link">
+    0.1. Namespaceを作成する
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-mysql" title="1 . MySQLデータベースを動かす" class="md-nav__link">
+    1 . MySQLデータベースを動かす
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-1-mysqldocker" title="1-1. MySQLのDockerイメージの準備" class="md-nav__link">
+    1-1. MySQLのDockerイメージの準備
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-2-dbpersistentvolume" title="1-2. DB用のPersistentVolumeの作成" class="md-nav__link">
+    1-2. DB用のPersistentVolumeの作成
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-3-secret" title="1-3. データベースユーザーのSecretの作成" class="md-nav__link">
+    1-3. データベースユーザーのSecretの作成
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-4" title="1-4. データベースのコンテナの起動" class="md-nav__link">
+    1-4. データベースのコンテナの起動
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" title="2 . アプリケーションを動かす" class="md-nav__link">
+    2 . アプリケーションを動かす
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-1-nodejsdocker" title="2-1. Node.jsアプリケーションのDockerイメージの準備" class="md-nav__link">
+    2-1. Node.jsアプリケーションのDockerイメージの準備
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2" title="2-2. アプリケーションのコンテナのデプロイ" class="md-nav__link">
+    2-2. アプリケーションのコンテナのデプロイ
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-ingress" title="3 . Ingressを使ったロードバランサーの構成" class="md-nav__link">
+    3 . Ingressを使ったロードバランサーの構成
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3-1-ingressnginx-ingress-controller" title="3-1. IngressとNGINX Ingress Controllerのデプロイ" class="md-nav__link">
+    3-1. IngressとNGINX Ingress Controllerのデプロイ
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2" title="3-2. アプリケーションへのアクセス" class="md-nav__link">
+    3-2. アプリケーションへのアクセス
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cndjp/tutorials/edit/master/docs/documents/kubernetes-basics/deploy-3tier-app.md" title="編集" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>Web-AP-DBの3層アプリケーションが動くまで</h1>
+                
+                <div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>本チュートリアルはまだ執筆作業中ですので、記述どおりに作業を行っても動作しない可能性があります。</p>
+</div>
+<p>このチュートリアルでは、Kubernetesクラスター上に、node.js/MySQLを使ったアプリケーション(koa-sample)をデプロイします。外部からのリクエストを受けるロードバランサーの代わりとして、KubernetesのIngressを利用します。</p>
+<h2 id="_1">前提条件<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>任意のKubernetesクラスター</li>
+<li>上記Kubernetesクラスターに接続可能なkubectl</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>本チュートリアルで、<a href="../../..#appendix">ローカルPCにKubernetesクラスターを構成する手順</a>もご案内していますので、適宜ご利用ください。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>以降の手順は、ほとんどの操作をコマンドラインツールから実行します。Mac/Linuxの場合はターミナル、Windowsの場合はWindows PowerShell利用するものとして、手順を記述します。</p>
+</div>
+<h2 id="0">0 . 準備作業<a class="headerlink" href="#0" title="Permanent link">&para;</a></h2>
+<p>まずは、このチュートリアルを進めるために必要なファイル一式の準備と、作業領域として利用するNamespaceを作成します。</p>
+<h3 id="01-namespace">0.1. Namespaceを作成する<a class="headerlink" href="#01-namespace" title="Permanent link">&para;</a></h3>
+<p>以降のチュートリアルの手順で利用するNamespaceとして、"koa-sample"を作成しておきます。</p>
+<div class="codehilite"><pre><span></span>kubectl create namespace koa-sample
+</pre></div>
+
+
+<p>デフォルトNamespaceを"bootcamp"に変更しておくことで、kubectlの実行の度にNamespaceを指定しなくても良いようにしておきます。</p>
+<div class="codehilite"><pre><span></span>kubectl config set-context $(kubectl config current-context) --namespace=koa-sample
+</pre></div>
+
+
+<p>アプリケーションの一連のmanifestファイルがこのリポジトリに保存されています。まずはこのリポジトリを適当なディレクトリにcloneして下さい。</p>
+<p>以下は、コマンドラインツールのgitを使う例です。</p>
+<div class="codehilite"><pre><span></span>git clone https://github.com/oracle-japan/cndjp2.git
+</pre></div>
+
+
+<p>cloneしてできたディレクトリ配下の、koa-sampleをカレント・ディレクトリにしておきます。</p>
+<div class="codehilite"><pre><span></span>cd cndjp2/koa-sample
+</pre></div>
+
+
+<p>このディレクトリ配下に、アプリケーションを動かすために必要なファイル一式が格納されています。</p>
+<h2 id="1-mysql">1 . MySQLデータベースを動かす<a class="headerlink" href="#1-mysql" title="Permanent link">&para;</a></h2>
+<h3 id="1-1-mysqldocker">1-1. MySQLのDockerイメージの準備<a class="headerlink" href="#1-1-mysqldocker" title="Permanent link">&para;</a></h3>
+<p>MySQLをKubernetesを動かすためには、予めコンテナイメージを作成してコンテナレジストリにアップロードしておく必要があります。
+今回は既にこの手順を実施済みですが、以下に作業内容を紹介します。</p>
+<p>このチュートリアルで利用するDBのコンテナイメージは、cndjp2/db配下のファイル群を使って作成してあります。</p>
+<div class="codehilite"><pre><span></span>&gt; ls db
+create_schema.sql  Dockerfile
+</pre></div>
+
+
+<p>Dockerfileを参照すると、Docker Hub公式のMySQLイメージを使っており、所定のフォルダに.sqlファイルを配置していることがわかります。</p>
+<div class="codehilite"><pre><span></span>&gt; cat db/Dockerfile
+FROM mysql:8.0.3
+
+COPY ./create_schema.sql /docker-entrypoint-initdb.d/
+</pre></div>
+
+
+<p>公式のMySQLイメージは、/docker-entrypoint-initdb.d/に.sqlファイルを配置しておくと、イメージの起動時にその.sqlを実行してくれるようになっています。また、イメージの起動時に所定の環境変数を設定すると、必要なDBユーザーを作成するなどが可能です。<br>
+詳細は<a href="https://hub.docker.com/_/mysql/">公式イメージのリポジトリのページ</a>を参照して下さい。</p>
+<p>今回は、アプリケーションで利用するスキーマとデータを、この仕組みを利用して作成することにしています。</p>
+<p>このようなDockerfileをつかって作成したイメージを、<a href="https://hub.docker.com/r/cndjp/koa-sample-db/">Docker Hubに登録</a>してあります。</p>
+<h3 id="1-2-dbpersistentvolume">1-2. DB用のPersistentVolumeの作成<a class="headerlink" href="#1-2-dbpersistentvolume" title="Permanent link">&para;</a></h3>
+<p>次に、MySQLデータベース用のデータ保存領域として利用するための、PersistentVolumeを作成します。</p>
+<p>このためのmanifestファイルを作成してありますので、中身を参照してみて下さい。</p>
+<div class="codehilite"><pre><span></span>&gt; cat deployment/db-pv-hostpath.yaml
+</pre></div>
+
+
+<p>内容は以下のとおりです。</p>
+<div class="codehilite"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">apiVersion</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="l l-Scalar l-Scalar-Plain">kind</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">PersistentVolume</span>
+<span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mysql-hostpath-pv</span>
+  <span class="l l-Scalar l-Scalar-Plain">labels</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">local</span>
+<span class="l l-Scalar l-Scalar-Plain">spec</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">capacity</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">storage</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">5Gi</span>
+  <span class="l l-Scalar l-Scalar-Plain">accessModes</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ReadWriteOnce</span>
+  <span class="l l-Scalar l-Scalar-Plain">persistentVolumeReclaimPolicy</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Retain</span>
+  <span class="l l-Scalar l-Scalar-Plain">hostPath</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/data/mysql</span>
+    <span class="c1"># type: DirectoryOrCreate</span>
+</pre></div>
+
+
+<p>この例では、hostPathのVolumeを作成しています。hostPathはNodeのローカルボリュームを利用する方法で、Node上のファイルにアクセスする必要がある場合を除くと、本番用途に適したものではありません。<br>
+本番向けには、該当箇所を適切に変更して、別のVolumeを利用する必要があります。</p>
+<p>それでは、このPersistentVolumeをクラスター上に作成します。</p>
+<div class="codehilite"><pre><span></span>&gt; kubectl create -f deployment/db-pv-hostpath.yaml
+persistentvolume &quot;mysql-hostpath-pv&quot; created
+</pre></div>
+
+
+<p>PersistentVolume一覧を取得する際は、以下のコマンドを実行します。</p>
+<div class="codehilite"><pre><span></span>&gt; kubectl get pv
+</pre></div>
+
+
+<p>PersistentVolumeの詳細情報は以下のように取得します。</p>
+<div class="codehilite"><pre><span></span>&gt; kubectl describe pv/mysql-hostpath-pv
+</pre></div>
+
+
+<h3 id="1-3-secret">1-3. データベースユーザーのSecretの作成<a class="headerlink" href="#1-3-secret" title="Permanent link">&para;</a></h3>
+<p>データベースユーザーの情報は、DBを稼働させるコンテナのmanifestに指定する事もできますが、その方法では、manifestファイル内に直接パスワードを記述することになってしまいます。これを避けるため、データベースユーザーのユーザー名/パスワードを保存するSecretオブジェクトを作成して、これを参照するようにします。</p>
+<p>このためのmanifestファイルも以下に作成済みです。</p>
+<div class="codehilite"><pre><span></span>&gt; cat deployment/db-secret.yaml
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">apiVersion</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="l l-Scalar l-Scalar-Plain">kind</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Secret</span>
+<span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">dbsecret</span>
+<span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Opaque</span>
+<span class="l l-Scalar l-Scalar-Plain">data</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">root_password</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">bXlzcWw=</span>
+  <span class="l l-Scalar l-Scalar-Plain">user</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">a29h</span>
+  <span class="l l-Scalar l-Scalar-Plain">password</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">a29h</span>
+</pre></div>
+
+
+<p>Secretに保存したいデータは、<code>data</code>配下に、Key/Valueの形式で記述します。このとき、値をbase64でエンコードしておく必要があります。</p>
+<p><strong>注意</strong>: Secretのmanifestをソースコードリポジトリに保存してしまうと、パスワード等の重要な情報がリポジトリを通して露出してしまいます。実際の運用では、このファイルまたはファイルに記述する値は、別途管理する必要があります。</p>
+<!-- ここでSecretを作らせてみる -->
+
+<p>それでは、このSecretをクラスター上に作成します。</p>
+<div class="codehilite"><pre><span></span>&gt; kubectl create -f deployment/db-secret.yaml
+secret &quot;dbsecret&quot; created
+</pre></div>
+
+
+<p>作成されたSecretを確認してみます。</p>
+<p>・一覧取得</p>
+<div class="codehilite"><pre><span></span>&gt; kubectl get secrets
+</pre></div>
+
+
+<p>・詳細情報取得</p>
+<div class="codehilite"><pre><span></span>&gt; kubectl describe secret/dbsecret
+</pre></div>
+
+
+<h3 id="1-4">1-4. データベースのコンテナの起動<a class="headerlink" href="#1-4" title="Permanent link">&para;</a></h3>
+<p>データベースのコンテナをデプロイします。ポイントは、データベース用のデータ保存領域としてPersistentVolumeを利用することと、Secretにあるユーザー名/パスワードを環境変数として指定してコンテナを起動することです。</p>
+<div class="codehilite"><pre><span></span>&gt; cat deployment/db-deployment.yaml
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">apiVersion</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="l l-Scalar l-Scalar-Plain">kind</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">koa-sample-db</span>
+<span class="l l-Scalar l-Scalar-Plain">spec</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">ports</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">port</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">3306</span>
+  <span class="l l-Scalar l-Scalar-Plain">selector</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">app</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">koa-sample-db</span>
+  <span class="l l-Scalar l-Scalar-Plain">clusterIP</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">apiVersion</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="l l-Scalar l-Scalar-Plain">kind</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">PersistentVolumeClaim</span>
+<span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mysql-pv-claim</span>
+<span class="l l-Scalar l-Scalar-Plain">spec</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">accessModes</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ReadWriteOnce</span>
+  <span class="l l-Scalar l-Scalar-Plain">resources</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">requests</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">storage</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">5Gi</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">apiVersion</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">apps/v1beta1</span> <span class="c1"># for versions before 1.8.0 use apps/v1beta1</span>
+<span class="l l-Scalar l-Scalar-Plain">kind</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">koa-sample-db</span>
+<span class="l l-Scalar l-Scalar-Plain">spec</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">selector</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">matchLabels</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">app</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">koa-sample-db</span>
+  <span class="l l-Scalar l-Scalar-Plain">strategy</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Recreate</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">labels</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">app</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">koa-sample-db</span>
+    <span class="l l-Scalar l-Scalar-Plain">spec</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">containers</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cndjp/koa-sample-db:0.1</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">koa-sample-db</span>
+        <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">MYSQL_ROOT_PASSWORD</span>
+          <span class="c1"># value: mysql</span>
+          <span class="l l-Scalar l-Scalar-Plain">valueFrom</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">secretKeyRef</span><span class="p p-Indicator">:</span>
+              <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">dbsecret</span>
+              <span class="l l-Scalar l-Scalar-Plain">key</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">root_password</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">MYSQL_USER</span>
+          <span class="c1"># value: koa</span>
+          <span class="l l-Scalar l-Scalar-Plain">valueFrom</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">secretKeyRef</span><span class="p p-Indicator">:</span>
+              <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">dbsecret</span>
+              <span class="l l-Scalar l-Scalar-Plain">key</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">user</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">MYSQL_PASSWORD</span>
+          <span class="c1"># value: koa</span>
+          <span class="l l-Scalar l-Scalar-Plain">valueFrom</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">secretKeyRef</span><span class="p p-Indicator">:</span>
+              <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">dbsecret</span>
+              <span class="l l-Scalar l-Scalar-Plain">key</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">password</span>
+        <span class="l l-Scalar l-Scalar-Plain">ports</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">containerPort</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">3306</span>
+          <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">koa-sample-db</span>
+        <span class="l l-Scalar l-Scalar-Plain">volumeMounts</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mysql-persistent-storage</span>
+          <span class="l l-Scalar l-Scalar-Plain">mountPath</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/var/lib/mysql</span>
+      <span class="l l-Scalar l-Scalar-Plain">volumes</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mysql-persistent-storage</span>
+        <span class="l l-Scalar l-Scalar-Plain">persistentVolumeClaim</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">claimName</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mysql-pv-claim</span>
+</pre></div>
+
+
+<p>このmanifestでは3つのオブジェクトを作成しています。PersistetVolumeを確保するためのPersistentVolumeClaim、DBをクラスター内に公開するためのService、DB本体を動かすPod(Deployment)です。</p>
+<p>特にDB本体のDeploymentにおいて、環境変数としてSecretの値を参照しているところを探してみて下さい。</p>
+<p>それでは、これらのオブジェクトをデプロイします。</p>
+<div class="codehilite"><pre><span></span>&gt; kubectl create -f deployment/db-deployment.yaml
+service &quot;koa-sample-db&quot; created
+persistentvolumeclaim &quot;mysql-pv-claim&quot; created
+deployment &quot;koa-sample-db&quot; created
+</pre></div>
+
+
+<p>Podの一覧を表示すると始めのうちはSTATUSがContainerCreatingになっています。</p>
+<div class="codehilite"><pre><span></span>&gt; kubectl get pods
+NAME                             READY     STATUS              RESTARTS   AGE
+koa-sample-db-3605205203-rq81f   0/1       ContainerCreating   0          30s
+</pre></div>
+
+
+<p>少しだけ時間をおいて、Runningになることを確認して下さい。</p>
+<p>ここで、実際にデータベースに繋いでみます。<br>
+データベースはServiceオブジェクトを通して公開されていますが、clusterIPモードでServiceを作成しているため、クラスター内からしかアクセスできません。そこで、クラスター内にMySQLのクライアント専用のコンテナをデプロイして、それ経由でアクセスします。</p>
+<div class="codehilite"><pre><span></span>&gt; kubectl run -it --rm --image=mysql:8.0.3 --restart=Never mysql-client -- mysql -h koa-sample-db -pmysql
+If you don&#39;t see a command prompt, try pressing enter.
+
+mysql&gt;
+</pre></div>
+
+
+<p>MySQLクライアントのプロンプトで、以下のコマンドを実行して、所定のデータベースとユーザーが作成されていることを確認して見て下さい。</p>
+<div class="codehilite"><pre><span></span>mysql&gt; show databases;
+
+mysql&gt; select Host, User from mysql.user;
+</pre></div>
+
+
+<h2 id="2">2 . アプリケーションを動かす<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h3 id="2-1-nodejsdocker">2-1. Node.jsアプリケーションのDockerイメージの準備<a class="headerlink" href="#2-1-nodejsdocker" title="Permanent link">&para;</a></h3>
+<p>データベース同様、アプリケーションを予めコンテナイメージ化して、コンテナレジストリに保存しておく必要があります。</p>
+<p>今回は既にこの手順を実施済みですが、以下に作業内容を紹介します。</p>
+<p>このチュートリアルで利用するアプリケーションのコンテナイメージは、cndjp2/ap配下のファイル群を使って作成してあります。</p>
+<div class="codehilite"><pre><span></span>&gt; ls ap
+Dockerfile  README.md   app-api/  app.js  logs/    package.json  test/
+LICENSE     app-admin/  app-www/  lib/    models/  public/
+</pre></div>
+
+
+<p>こちらもDocker Hub公式のNode.jsイメージをベースとして使っており、所定のフォルダにアプリケーションのフォルダを配置して、必要なセットアップを行っています。</p>
+<div class="codehilite"><pre><span></span>&gt; cat ap/Dockerfile
+FROM node:9.2.1
+
+ENV APP_ROOT /usr/src/koa-sample-ap
+
+COPY . $APP_ROOT
+WORKDIR $APP_ROOT
+
+RUN npm install &amp;&amp; npm cache verify
+
+EXPOSE 3000
+
+CMD [&quot;npm&quot;, &quot;start&quot;]
+</pre></div>
+
+
+<p>公式のNode.jsイメージの詳細は<a href="https://hub.docker.com/_/node/">公式イメージのリポジトリのページ</a>を参照して下さい。</p>
+<p>このようなDockerfileをつかって作成したイメージを、<a href="https://hub.docker.com/r/cndjp/koa-sample-ap/">Docker Hubに登録</a>してあります。</p>
+<h3 id="2-2">2-2. アプリケーションのコンテナのデプロイ<a class="headerlink" href="#2-2" title="Permanent link">&para;</a></h3>
+<p>アプリケーションのコンテナをデプロイします。ポイントは、データベースのアクセスユーザー上納を、Secretから取得するように記述することです。<br>
+DB、アプリともユーザー情報をSecretから取得することで、ユーザー名/パスワードを変更したいときSecretを変更しさえすればよいようにできます。</p>
+<div class="codehilite"><pre><span></span>&gt; cat deployment/ap-deployment.yaml
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">apiVersion</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="l l-Scalar l-Scalar-Plain">kind</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">koa-sample-ap</span>
+<span class="l l-Scalar l-Scalar-Plain">spec</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">selector</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">app</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">koa-sample-ap</span>
+  <span class="l l-Scalar l-Scalar-Plain">ports</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">port</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">3000</span>
+  <span class="l l-Scalar l-Scalar-Plain">clusterIP</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
+<span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">apiVersion</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">apps/v1beta1</span> <span class="c1"># for versions before 1.8.0 use apps/v1beta1</span>
+<span class="l l-Scalar l-Scalar-Plain">kind</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">koa-sample-ap</span>
+<span class="l l-Scalar l-Scalar-Plain">spec</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">replicas</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+  <span class="l l-Scalar l-Scalar-Plain">selector</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">matchLabels</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">app</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">koa-sample-ap</span>
+  <span class="l l-Scalar l-Scalar-Plain">strategy</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Recreate</span>
+  <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">labels</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">app</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">koa-sample-ap</span>
+    <span class="l l-Scalar l-Scalar-Plain">spec</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">containers</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cndjp/koa-sample-ap:0.1</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">koa-sample-ap</span>
+        <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span>
+          <span class="c1"># Use secret in real usage</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">DB_HOST</span>
+          <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">koa-sample-db</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">DB_PORT</span>
+          <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="s">&quot;3306&quot;</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">DB_USER</span>
+          <span class="c1"># value: koa</span>
+          <span class="l l-Scalar l-Scalar-Plain">valueFrom</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">secretKeyRef</span><span class="p p-Indicator">:</span>
+              <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">dbsecret</span>
+              <span class="l l-Scalar l-Scalar-Plain">key</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">user</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">DB_PASSWORD</span>
+          <span class="c1"># value: koa</span>
+          <span class="l l-Scalar l-Scalar-Plain">valueFrom</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">secretKeyRef</span><span class="p p-Indicator">:</span>
+              <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">dbsecret</span>
+              <span class="l l-Scalar l-Scalar-Plain">key</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">password</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">DB_DATABASE</span>
+          <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">koa-sample-sandbox</span>
+        <span class="l l-Scalar l-Scalar-Plain">ports</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">containerPort</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">3000</span>
+          <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">koa-sample-ap</span>
+</pre></div>
+
+
+<p>ここでも、データベースユーザーのユーザー名/パスワードをSecretから取得して、環境変数に与えている箇所を確認してみて下さい（環境変数にユーザー名、パスワードを設定するのは、このサンプルアプリの仕様です）。</p>
+<p>また、このアプリもclusterIPモードのServiceを通して公開されており、クラスター内からしかアクセスすることはできません。<br>
+クラスター外部への公開は、次章以降でIngressを使って行います。</p>
+<p>それでは、このアプリケーションをデプロイします。</p>
+<div class="codehilite"><pre><span></span>&gt; kubectl create -f deployment/ap-deployment.yaml
+service &quot;koa-sample-ap&quot; created
+deployment &quot;koa-sample-ap&quot; created
+</pre></div>
+
+
+<p>ここでもPodのステータスがRunningになるまで、少し時間を置いて下さい</p>
+<div class="codehilite"><pre><span></span>&gt; kubectl get pods
+NAME                             READY     STATUS              RESTARTS   AGE
+koa-sample-ap-4193452636-03r9s   0/1       ContainerCreating   0          9s
+koa-sample-ap-4193452636-13vnj   0/1       ContainerCreating   0          9s
+koa-sample-db-3605205203-rq81f   1/1       Running             0          36m
+</pre></div>
+
+
+<h2 id="3-ingress">3 . Ingressを使ったロードバランサーの構成<a class="headerlink" href="#3-ingress" title="Permanent link">&para;</a></h2>
+<h3 id="3-1-ingressnginx-ingress-controller">3-1. IngressとNGINX Ingress Controllerのデプロイ<a class="headerlink" href="#3-1-ingressnginx-ingress-controller" title="Permanent link">&para;</a></h3>
+<p>Ingressを使うと、外部アクセスのロードバランシングやSSL/TLSの終端といった、Webフロントの機能を、クラスター内に構成することができます（IngressはKubernetes 1.8の時点ではBetaの機能です。現時点では、クラスター外にLBを構成する方法が主流となっています）。</p>
+<p>Ingressオブジェクトは、Webフロントとしての構成情報を設定するオブジェクトで、実際の機能を担う実態は、別途ReplicationControllerとしてデプロイする必要があります。
+今回はNGINXを利用した、<a href="https://github.com/kubernetes/ingress-nginx">NGiNX Ingress Controller</a>を使います。</p>
+<p>まずはじめに、外部からのリクエストに対してルーティング先が見つからなかったときのレスポンスを返すものとして、デフォルトのバックエンドを構成しておきます。</p>
+<div class="codehilite"><pre><span></span>&gt; kubectl create -f deployment/web-default-backend.yaml
+replicationcontroller &quot;default-http-backend&quot; created
+
+&gt; kubectl expose rc default-http-backend --port=80 --target-port=8080 --name=default-http-backend
+service &quot;default-http-backend&quot; exposed
+</pre></div>
+
+
+<p>今回のNGINX Ingress Controllerのmanifestでは、role=frontというLabelのついたNodeにデプロイされるように設定しています。以下のようにNodeにLabelを設定して、デプロイ先のNodeが固定されるようにします。</p>
+<div class="codehilite"><pre><span></span>&gt; kubectl label nodes 172.17.8.102 role=front
+</pre></div>
+
+
+<p>NGINX Ingress Controllerをデプロイします。</p>
+<div class="codehilite"><pre><span></span>&gt; kubectl create -f deployment/web-rc-default.yaml
+replicationcontroller &quot;nginx-ingress-controller&quot; created
+</pre></div>
+
+
+<p>最後にIngressオブジェクトを構成します。</p>
+<div class="codehilite"><pre><span></span>&gt; kubectl create -f deployment/web-ingress.yaml
+</pre></div>
+
+
+<h3 id="3-2">3-2. アプリケーションへのアクセス<a class="headerlink" href="#3-2" title="Permanent link">&para;</a></h3>
+<p>まず、hostsファイルを編集し、アプリケーションにアクセスするためのエントリーを追加します。
+プラットフォーム毎のhostsファイルの場所は、以下のとおりです。</p>
+<p>・Linux</p>
+<div class="codehilite"><pre><span></span>&gt; /etc/hosts
+</pre></div>
+
+
+<p>・Mac
+    &gt; /private/etc/hosts</p>
+<p>・Windows</p>
+<div class="codehilite"><pre><span></span>&gt; C:\Windows\System32\drivers\etc\hosts&quot;
+</pre></div>
+
+
+<!--
+    > powershell -NoProfile -ExecutionPolicy unrestricted -Command "start notepad C:\Windows\System32\drivers\etc\hosts -verb runas"
+-->
+
+<p>以下のエントリーを追加して下さい。</p>
+<div class="codehilite"><pre><span></span>172.17.8.102        k8s
+172.17.8.102        admin.k8s
+172.17.8.102        api.k8s
+172.17.8.102        www.k8s
+</pre></div>
+
+
+<p>サンプルアプリケーションのAPIにアクセスするには、以下のコマンドを実行します。これは、アプリケーションにログインするREST APIを実行しています。</p>
+<div class="codehilite"><pre><span></span>&gt; curl -X GET &quot;http://api.k8s/auth?username=admin@user.com&amp;password=admin&quot;
+</pre></div>
+
+
+<p>返却されたJWTのトークン（ランダムな文字列）をコピーしておきます。</p>
+<p>つづいて、以下のコマンドの[JWT Token]部分を上記のトークンに置き換えて、コマンドを実行します。</p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> <span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">GET</span> <span class="o">-</span><span class="n">H</span> <span class="s">&quot;Authorization: Bearer [JWT Token]&quot;</span> <span class="nl">http</span><span class="p">:</span><span class="c1">//api.k8s/members</span>
+</pre></div>
+
+
+<p>例えば、以下のようなコマンドになります。</p>
+<div class="codehilite"><pre><span></span>&gt; curl -X GET -H &quot;Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAwMDAyLCJyb2xlIjoiYSIsImlhdCI6MTUxMzUzOTk2OCwiZXhwIjoxNTEzNjI2MzY4fQ.pbeXUSE41BHEn1jmd7JaDhose7lWojP_P0zrSCXBx8c&quot; http://api.k8s/members
+</pre></div>
+
+
+<p>うまくいけば、以下のように、アプリケーションに登録されているメンバー情報がJSONで取得できます。</p>
+<div class="codehilite"><pre><span></span>[{&quot;_id&quot;:100002,&quot;_uri&quot;:&quot;/members/100002&quot;},{&quot;_id&quot;:100001,&quot;_uri&quot;:&quot;/members/100001&quot;},{&quot;_id&quot;:100004,&quot;_uri&quot;:&quot;/members/100004&quot;},{&quot;_id&quot;:100003,&quot;_uri&quot;:&quot;/members/100003&quot;}]
+</pre></div>
+
+
+<p>ご自身のPCにクラスターを作成して動かしている方（一時借し出し環境でない方）は、ブラウザで以下のURLにアクセスすると、GUIのアプリケーション画面にアクセスできます。</p>
+<div class="codehilite"><pre><span></span>http://k8s/
+</pre></div>
+
+
+<hr />
+<p>ハンズオンのPart2は以上です。</p>
+<!--
+4. 練習問題
+-->
+
+<!--
+-->
+
+<!--
+余力のある方は、アプリケーションレイヤーのカナリーデプロイメントに挑戦してみて下さい。
+
+カナリーデプロイメントを行うには、LabelとLabelSelectorを利用します。サンプルとして以下の公式ドキュメントの技術を参考にして下さい。
+
+    - https://kubernetes.io/docs/concepts/cluster-administration/manage-deployment/#canary-deployments
+-->
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../logging/" title="Kubernetesにおけるログの収集" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前
+                </span>
+                Kubernetesにおけるログの収集
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../istio/install-istio/" title="Istioのインストール" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  次
+                </span>
+                Istioのインストール
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+      <a href="https://github.com/cndjp" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.b438e6c5.js"></script>
+      
+        
+        
+          
+          <script src="../../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+          
+            
+              
+                <script src="../../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+            <script src="../../../assets/javascripts/lunr/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"0.17.3",url:{base:"../../.."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>
