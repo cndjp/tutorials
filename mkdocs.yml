@@ -32,6 +32,7 @@ pages:
     - Kubernetesの基礎:
         - 最初のアプリケーションを動かしてみる: 'documents/kubernetes-basics/play-with-bootcamp-app.md'
         - Kubernetesにおけるログの収集: 'documents/kubernetes-basics/logging.md'
+        - Web-AP-DBの3層アプリケーションが動くまで: 'documents/kubernetes-basics/deploy-3tier-app.md'
     - サービスメッシュ Istio:
         - Istioのインストール: 'documents/istio/install-istio.md'
         - リクエスト・ルーティングの制御: 'documents/istio/configuring-request-routing.md'
