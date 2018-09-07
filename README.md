@@ -4,7 +4,7 @@ Hands on tutorials for Cloud Native Developsers JP meetup course
 How to build
 ------------
 
-### 1. [Install mkdcos](http://www.mkdocs.org/#installation).
+### 1. [Install MkDocs](http://www.mkdocs.org/#installation).
 
 ### 2. Install material theme and extensions
 
