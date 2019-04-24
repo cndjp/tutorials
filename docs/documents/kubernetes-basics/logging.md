@@ -60,7 +60,7 @@ spec:
     args: [/bin/sh, -c, 'i=0; while true; do echo "$i: $(date)"; i=$((i+1)); sleep 1; done']
 ```
 
-このmanifestファイルでは、counterとい名前のPodを定義しています（以下、このPodをcounterと表記します）。Podが内包するコンテナは、__{.spec.containers}__の配下に記述されており、この例ではcountという名前のひとつのコンテナを含んでいます。
+このmanifestファイルでは、counterという名前のPodを定義しています（以下、このPodをcounterと表記します）。Podが内包するコンテナは、__{.spec.containers}__の配下に記述されており、この例ではcountという名前のひとつのコンテナを含んでいます。
 
 countコンテナは、[busybox](https://hub.docker.com/_/busybox/)というDockerイメージを使っており、ここでは日時を定期的に標準出力に出力するよう記述されています。
 
@@ -122,7 +122,7 @@ kubectl logs counter
     ``kubectl logs``コマンドは、logging driverによって作成されたログファイルの内容を表示していることになります。
 
 ### 1.4. counterを削除する
-counter削除するには、`kubectl delete`を使います。Podの名前を指定して削除を実行することもできますが、作成時と同じようにmanifestを指定することもできます。以下のコマンドを実行して、counterを削除します。
+counterを削除するには、`kubectl delete`を使います。Podの名前を指定して削除を実行することもできますが、作成時と同じようにmanifestを指定することもできます。以下のコマンドを実行して、counterを削除します。
 
     kubectl delete -f counter.yml
 
@@ -205,7 +205,7 @@ __{.spec.containers}__配下に、このmanifestファイルで定義されたPo
 
 two-files-logging-countは、/var/log/1.log、/var/log/2.logという2ファイルに、フォーマットの異なる日時情報を出力しています。2つのsidecarコンテナcount-log-1、count-log-2は、それぞれ/var/log/1.log、/var/log/2.logをtailして標準出力に出力しています。
 
-``kubectl logs``などでこれらのsidecarコンテナの標準出力にアクセスすることっで、two-files-logging-countが出力するログファイルの内容を確認することができます。
+``kubectl logs``などでこれらのsidecarコンテナの標準出力にアクセスすることで、two-files-logging-countが出力するログファイルの内容を確認することができます。
 
 それでは、このPodをデプロイします。
 
